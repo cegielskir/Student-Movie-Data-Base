@@ -1,11 +1,14 @@
 package com.crgp.smdb.entity;
 
 
-import com.sun.tools.javac.util.List;
+
+
 
 import javax.persistence.*;
+import java.util.List;
 
-@MappedSuperclass
+@Entity
+@Inheritance(strategy=InheritanceType.JOINED)
 public abstract class Production {
 
     @Id
@@ -22,7 +25,7 @@ public abstract class Production {
     )
     private List<Creator> directors;
 
-    @ManyToMany(fetch = FetchType.EAGER,
+    @ManyToMany(fetch = FetchType.LAZY,
             cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
     @JoinTable(
             name = "production_genre",
@@ -30,9 +33,6 @@ public abstract class Production {
             inverseJoinColumns = @JoinColumn(name = "genre_id")
     )
     private List<Genre> genreList;
-
-
-    private List<Award> awards;
 
     public Production() {}
 
@@ -61,11 +61,4 @@ public abstract class Production {
         this.genreList = genreList;
     }
 
-    public List<Award> getAwards() {
-        return awards;
-    }
-
-    public void setAwards(List<Award> awards) {
-        this.awards = awards;
-    }
 }
