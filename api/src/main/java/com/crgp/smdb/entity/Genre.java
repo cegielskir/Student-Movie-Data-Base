@@ -1,10 +1,8 @@
 package com.crgp.smdb.entity;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.util.List;
 
 @Entity
 public class Genre {
@@ -15,6 +13,14 @@ public class Genre {
 
     @NotNull
     private String name;
+
+    @ManyToMany
+    @JoinTable(
+            name = "production_genre",
+            joinColumns = @JoinColumn(name = "production_id"),
+            inverseJoinColumns = @JoinColumn(name = "genre_id")
+    )
+    private List<Production> productions;
 
     public Genre() {}
 
@@ -36,5 +42,17 @@ public class Genre {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public List<Production> getProductions() {
+        return productions;
+    }
+
+    public void setProductions(List<Production> productions) {
+        this.productions = productions;
+    }
+
+    public void addProduction(Production production){
+        this.productions.add(production);
     }
 }

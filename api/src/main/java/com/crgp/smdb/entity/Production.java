@@ -22,11 +22,11 @@ public abstract class Production {
     @ManyToMany(fetch = FetchType.EAGER,
             cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
     @JoinTable(
-            name = "movie_director",
-            joinColumns = @JoinColumn(name = "movie_id"),
-            inverseJoinColumns = @JoinColumn(name = "director_id")
+            name = "production_creator",
+            joinColumns = @JoinColumn(name = "production_id"),
+            inverseJoinColumns = @JoinColumn(name = "creator_id")
     )
-    private List<Creator> directors;
+    private List<Creator> creators;
 
     @ManyToMany(fetch = FetchType.LAZY,
             cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
@@ -35,7 +35,7 @@ public abstract class Production {
             joinColumns = @JoinColumn(name = "production_id"),
             inverseJoinColumns = @JoinColumn(name = "genre_id")
     )
-    private List<Genre> genreList;
+    private List<Genre> genres;
 
     public Production() {}
 
@@ -57,11 +57,11 @@ public abstract class Production {
 
 
     public List<Genre> getGenreList() {
-        return genreList;
+        return genres;
     }
 
     public void setGenreList(List<Genre> genreList) {
-        this.genreList = genreList;
+        this.genres = genreList;
     }
 
     public List<Rating> getRatings() {
@@ -73,10 +73,26 @@ public abstract class Production {
     }
 
     public List<Creator> getDirectors() {
-        return directors;
+        return creators;
     }
 
     public void setDirectors(List<Creator> directors) {
-        this.directors = directors;
+        this.creators = directors;
+    }
+
+    public void addRating(Rating rating){
+        this.ratings.add(rating);
+        rating.setProduction(this);
+
+    }
+
+    public void addGenre(Genre genre){
+        this.genres.add(genre);
+        genre.addProduction(this);
+    }
+
+    public void addCreator(Creator creator){
+        this.creators.add(creator);
+        creator.addProduction(this);
     }
 }

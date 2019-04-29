@@ -1,9 +1,7 @@
 package com.crgp.smdb.entity;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.List;
 
 @Entity
 public class Creator {
@@ -13,6 +11,16 @@ public class Creator {
     private int id;
     private String firstName;
     private String lastName;
+
+    @ManyToMany(fetch = FetchType.EAGER,
+            cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
+    @JoinTable(
+            name = "production_creator",
+            joinColumns = @JoinColumn(name = "production_id"),
+            inverseJoinColumns = @JoinColumn(name = "creator_id")
+    )
+    private List<Production> productions;
+
 
     public Creator() {}
 
@@ -38,5 +46,17 @@ public class Creator {
 
     public void setLastName(String lastName) {
         this.lastName = lastName;
+    }
+
+    public List<Production> getProductions() {
+        return productions;
+    }
+
+    public void setProductions(List<Production> productions) {
+        this.productions = productions;
+    }
+
+    public void addProduction(Production production){
+        this.productions.add(production);
     }
 }

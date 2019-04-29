@@ -16,6 +16,16 @@ public class Series extends Production {
 
     public Series() {}
 
+    @Override
+    public int getId() {
+        return id;
+    }
+
+    @Override
+    public void setId(int id) {
+        this.id = id;
+    }
+
     public int getNumberOfSeasons() {
         return numberOfSeasons;
     }

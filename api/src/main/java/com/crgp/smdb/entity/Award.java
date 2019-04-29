@@ -49,4 +49,13 @@ public class Award {
     public void setDesription(String desription) {
         this.desription = desription;
     }
+
+    public Production getProduction() {
+        return production;
+    }
+
+    public void setProduction(Production production) {
+        this.production = production;
+        this.pr
+    }
 }
