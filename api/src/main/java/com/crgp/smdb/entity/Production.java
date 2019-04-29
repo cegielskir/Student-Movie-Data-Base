@@ -16,6 +16,9 @@ public abstract class Production {
     private int id;
     private String title;
 
+    @OneToMany(mappedBy = "rating", cascade = CascadeType.ALL)
+    private List<Rating> ratings;
+
     @ManyToMany(fetch = FetchType.EAGER,
             cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
     @JoinTable(
@@ -61,4 +64,19 @@ public abstract class Production {
         this.genreList = genreList;
     }
 
+    public List<Rating> getRatings() {
+        return ratings;
+    }
+
+    public void setRatings(List<Rating> ratings) {
+        this.ratings = ratings;
+    }
+
+    public List<Creator> getDirectors() {
+        return directors;
+    }
+
+    public void setDirectors(List<Creator> directors) {
+        this.directors = directors;
+    }
 }
