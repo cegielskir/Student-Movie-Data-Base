@@ -1,11 +1,10 @@
 package com.crgp.smdb.entity;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.List;
 
 @Entity
+@DiscriminatorValue("series")
 public class Series extends Production {
 
 
@@ -16,12 +15,10 @@ public class Series extends Production {
 
     public Series() {}
 
-    @Override
     public int getId() {
         return id;
     }
 
-    @Override
     public void setId(int id) {
         this.id = id;
     }
@@ -32,5 +29,13 @@ public class Series extends Production {
 
     public void setNumberOfSeasons(int numberOfSeasons) {
         this.numberOfSeasons = numberOfSeasons;
+    }
+
+    @Override
+    public String toString() {
+        return "Series{" +
+                "id=" + id +
+                ", numberOfSeasons=" + numberOfSeasons +
+                '}';
     }
 }

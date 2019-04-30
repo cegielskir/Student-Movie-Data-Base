@@ -4,7 +4,7 @@ import javax.persistence.*;
 import java.util.List;
 
 @Entity
-public class Creator extends RateableObject {
+public class Creator{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -20,6 +20,12 @@ public class Creator extends RateableObject {
             inverseJoinColumns = @JoinColumn(name = "creator_id")
     )
     private List<Production> productions;
+
+    @OneToMany(mappedBy = "creator", cascade = CascadeType.ALL)
+    private List<CreatorAward> awards;
+
+    @OneToMany(mappedBy = "creator", cascade = CascadeType.ALL)
+    private List<CreatorRating> ratings;
 
 
     public Creator() {}
@@ -58,5 +64,31 @@ public class Creator extends RateableObject {
 
     public void addProduction(Production production){
         this.productions.add(production);
+    }
+
+    public List<CreatorAward> getAwards() {
+        return awards;
+    }
+
+    public void setAwards(List<CreatorAward> awards) {
+        this.awards = awards;
+    }
+
+    public List<CreatorRating> getRatings() {
+        return ratings;
+    }
+
+    public void setRatings(List<CreatorRating> ratings) {
+        this.ratings = ratings;
+    }
+
+    public void addAward(CreatorAward award){
+        this.awards.add(award);
+        award.setOwner(this);
+    }
+
+    public void addRating(CreatorRating rating){
+        this.ratings.add(rating);
+        rating.setOwner(this);
     }
 }

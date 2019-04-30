@@ -4,24 +4,25 @@ package com.crgp.smdb.entity;
 import javax.persistence.*;
 import java.sql.Time;
 import java.util.Date;
+import java.util.List;
 
 @Entity
-public class Movie extends Production {
+@DiscriminatorValue("movie")
+public class Movie extends Production{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+
     private Date premiereDate;
     private Time duration;
 
     public Movie() {}
 
-    @Override
     public int getId() {
         return id;
     }
 
-    @Override
     public void setId(int id) {
         this.id = id;
     }
@@ -40,5 +41,16 @@ public class Movie extends Production {
 
     public void setDuration(Time duration) {
         this.duration = duration;
+    }
+
+
+
+    @Override
+    public String toString() {
+        return "Movie{" +
+                "id=" + id +
+                ", premiereDate=" + premiereDate +
+                ", duration=" + duration +
+                '}';
     }
 }

@@ -4,7 +4,9 @@ import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
 @Entity
-public class Award {
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+@DiscriminatorColumn(name = "award_type")
+public abstract class Award {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -14,10 +16,6 @@ public class Award {
     private String awardName;
 
     private String desription;
-
-    @ManyToOne
-    @JoinColumn(name = "rateable_object_id")
-    private RateableObject rateableObject;
 
     public Award() {}
 
@@ -50,11 +48,6 @@ public class Award {
         this.desription = desription;
     }
 
-    public RateableObject getRateableObject() {
-        return rateableObject;
-    }
+    public abstract void setOwner(Object object);
 
-    public void setRateableObject(RateableObject rateableObject) {
-        this.rateableObject = rateableObject;
-    }
 }

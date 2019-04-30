@@ -6,9 +6,11 @@ package com.crgp.smdb.entity;
 
 import javax.persistence.*;
 import java.util.List;
+
 @Entity
-@Inheritance(strategy = InheritanceType.JOINED)
-public abstract class Production extends RateableObject{
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+@DiscriminatorColumn(name = "production_type")
+public abstract class Production{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -32,6 +34,12 @@ public abstract class Production extends RateableObject{
             inverseJoinColumns = @JoinColumn(name = "genre_id")
     )
     private List<Genre> genres;
+
+    @OneToMany(mappedBy = "production", cascade = CascadeType.ALL)
+    private List<ProductionAward> awards;
+
+    @OneToMany(mappedBy = "production", cascade = CascadeType.ALL)
+    private List<ProductionRating> ratings;
 
     public Production() {}
 
@@ -78,5 +86,31 @@ public abstract class Production extends RateableObject{
     public void addCreator(Creator creator){
         this.creators.add(creator);
         creator.addProduction(this);
+    }
+
+    public List<ProductionAward> getAwards() {
+        return awards;
+    }
+
+    public void setAwards(List<ProductionAward> awards) {
+        this.awards = awards;
+    }
+
+    public List<ProductionRating> getRatings() {
+        return ratings;
+    }
+
+    public void setRatings(List<ProductionRating> ratings) {
+        this.ratings = ratings;
+    }
+
+    public void addAward(ProductionAward award){
+        this.awards.add(award);
+        award.setOwner(this);
+    }
+
+    public void addRating(ProductionRating rating){
+        this.ratings.add(rating);
+        rating.setOwner(this);
     }
 }
