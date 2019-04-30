@@ -6,6 +6,8 @@ import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.data.jpa.convert.threeten.Jsr310JpaConverters;
 
 import javax.annotation.PostConstruct;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.TimeZone;
 
 @SpringBootApplication
@@ -24,3 +26,5 @@ public class SmdbApplication {
 		SpringApplication.run(SmdbApplication.class, args);
 	}
 }
+
+

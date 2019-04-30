@@ -16,10 +16,10 @@ public class Rating {
     private int value;
 
     @ManyToOne
-    @JoinColumn(name = "production_id")
-    private Production production;
+    @JoinColumn(name = "rateable_object_id")
+    private RateableObject rateableObject;
 
-    @OneToMany
+    @ManyToOne
     @JoinColumn(name = "user_id")
     private User user;
 
@@ -41,12 +41,12 @@ public class Rating {
         this.value = value;
     }
 
-    public Production getProduction() {
-        return production;
+    public RateableObject getRateableObject() {
+        return rateableObject;
     }
 
-    public void setProduction(Production production) {
-        this.production = production;
+    public void setRateableObject(RateableObject rateableObject) {
+        this.rateableObject = rateableObject;
     }
 
     public User getUser() {

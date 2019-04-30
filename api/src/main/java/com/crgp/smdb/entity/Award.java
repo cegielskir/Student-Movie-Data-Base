@@ -16,8 +16,8 @@ public class Award {
     private String desription;
 
     @ManyToOne
-    @JoinColumn(name = "production_id")
-    private Production production;
+    @JoinColumn(name = "rateable_object_id")
+    private RateableObject rateableObject;
 
     public Award() {}
 
@@ -50,12 +50,11 @@ public class Award {
         this.desription = desription;
     }
 
-    public Production getProduction() {
-        return production;
+    public RateableObject getRateableObject() {
+        return rateableObject;
     }
 
-    public void setProduction(Production production) {
-        this.production = production;
-        this.pr
+    public void setRateableObject(RateableObject rateableObject) {
+        this.rateableObject = rateableObject;
     }
 }

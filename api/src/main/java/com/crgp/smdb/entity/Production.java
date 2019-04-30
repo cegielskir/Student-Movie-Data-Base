@@ -6,18 +6,14 @@ package com.crgp.smdb.entity;
 
 import javax.persistence.*;
 import java.util.List;
-
 @Entity
-@Inheritance(strategy=InheritanceType.JOINED)
-public abstract class Production {
+@Inheritance(strategy = InheritanceType.JOINED)
+public abstract class Production extends RateableObject{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private String title;
-
-    @OneToMany(mappedBy = "rating", cascade = CascadeType.ALL)
-    private List<Rating> ratings;
 
     @ManyToMany(fetch = FetchType.EAGER,
             cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
@@ -64,13 +60,6 @@ public abstract class Production {
         this.genres = genreList;
     }
 
-    public List<Rating> getRatings() {
-        return ratings;
-    }
-
-    public void setRatings(List<Rating> ratings) {
-        this.ratings = ratings;
-    }
 
     public List<Creator> getDirectors() {
         return creators;
@@ -80,11 +69,6 @@ public abstract class Production {
         this.creators = directors;
     }
 
-    public void addRating(Rating rating){
-        this.ratings.add(rating);
-        rating.setProduction(this);
-
-    }
 
     public void addGenre(Genre genre){
         this.genres.add(genre);

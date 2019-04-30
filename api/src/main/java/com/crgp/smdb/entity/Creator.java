@@ -4,7 +4,7 @@ import javax.persistence.*;
 import java.util.List;
 
 @Entity
-public class Creator {
+public class Creator extends RateableObject {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
