@@ -7,11 +7,12 @@ import Tabs from './components/Movies/Tabs/Tabs'
 
 import './App.css';
 
-
 class App extends Component {
   constructor(props) {
     super(props);
-
+    this.state = {
+      currentUser: null,
+    };
   }
 
   componentDidMount() {
@@ -30,7 +31,6 @@ class App extends Component {
             </div>
           </section>
         </main>
-
 
         <Footer />
       </div>

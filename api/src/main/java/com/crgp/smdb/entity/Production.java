@@ -14,7 +14,7 @@ public abstract class Production{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private long id;
     private String title;
 
     @ManyToMany(fetch = FetchType.EAGER,
@@ -43,7 +43,7 @@ public abstract class Production{
 
     public Production() {}
 
-    public int getId() {
+    public long getId() {
         return id;
     }
 

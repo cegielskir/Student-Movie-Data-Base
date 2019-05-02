@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 
+import Client from '../../../api/client'
 
 import './Tab.css'
 
@@ -19,28 +20,28 @@ export default class AppTabs extends React.Component {
            <Tab label="Nadchodzące">
            <div className="row">
              <div className="col-md-2">
-               <img src="https://m.media-amazon.com/images/M/MV5BMTc5MDE2ODcwNV5BMl5BanBnXkFtZTgwMzI2NzQ2NzM@._V1_SX300.jpg"/>
+               <img alt="" src="https://m.media-amazon.com/images/M/MV5BMTc5MDE2ODcwNV5BMl5BanBnXkFtZTgwMzI2NzQ2NzM@._V1_SX300.jpg"/>
              </div>
              <div className="col-md-2">
-               <img src="https://m.media-amazon.com/images/M/MV5BNDYxNjQyMjAtNTdiOS00NGYwLWFmNTAtNThmYjU5ZGI2YTI1XkEyXkFqcGdeQXVyMTMxODk2OTU@._V1_SX300.jpg"/>
+               <img alt="" src="https://m.media-amazon.com/images/M/MV5BNDYxNjQyMjAtNTdiOS00NGYwLWFmNTAtNThmYjU5ZGI2YTI1XkEyXkFqcGdeQXVyMTMxODk2OTU@._V1_SX300.jpg"/>
              </div>
              <div className="col-md-2">
-               <img src="https://m.media-amazon.com/images/M/MV5BMTE0YWFmOTMtYTU2ZS00ZTIxLWE3OTEtYTNiYzBkZjViZThiXkEyXkFqcGdeQXVyODMzMzQ4OTI@._V1_SX300.jpg"/>
+               <img alt="" src="https://m.media-amazon.com/images/M/MV5BMTE0YWFmOTMtYTU2ZS00ZTIxLWE3OTEtYTNiYzBkZjViZThiXkEyXkFqcGdeQXVyODMzMzQ4OTI@._V1_SX300.jpg"/>
              </div>
              <div className="col-md-2">
-               <img src="https://m.media-amazon.com/images/M/MV5BMTg1MTY2MjYzNV5BMl5BanBnXkFtZTgwMTc4NTMwNDI@._V1_SX300.jpg"/>
+               <img alt="" src="https://m.media-amazon.com/images/M/MV5BMTg1MTY2MjYzNV5BMl5BanBnXkFtZTgwMTc4NTMwNDI@._V1_SX300.jpg"/>
              </div>
              <div className="col-md-2">
-               <img src="https://m.media-amazon.com/images/M/MV5BMjMyNDkzMzI1OF5BMl5BanBnXkFtZTgwODcxODg5MjI@._V1_SX300.jpg"/>
+               <img alt="" src="https://m.media-amazon.com/images/M/MV5BMjMyNDkzMzI1OF5BMl5BanBnXkFtZTgwODcxODg5MjI@._V1_SX300.jpg"/>
              </div>
              <div className="col-md-2">
-               <img src="https://m.media-amazon.com/images/M/MV5BMjMxNjY2MDU1OV5BMl5BanBnXkFtZTgwNzY1MTUwNTM@._V1_SX300.jpg"/>
+               <img alt="" src="https://m.media-amazon.com/images/M/MV5BMjMxNjY2MDU1OV5BMl5BanBnXkFtZTgwNzY1MTUwNTM@._V1_SX300.jpg"/>
              </div>
             </div>
            </Tab>
            <Tab label="Popularne">
              <div>
-              <p>Popularne</p>
+              <Client />
              </div>
            </Tab>
            <Tab label="Często recenzowane">
@@ -60,7 +61,7 @@ export default class AppTabs extends React.Component {
     }
   }
   
-class Tabs extends React.Component{
+class Tabs extends Component{
     state ={
         activeTab: this.props.children[0].props.label
     }

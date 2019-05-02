@@ -12,14 +12,14 @@ public class Movie extends Production{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private long id;
 
     private Date premiereDate;
     private Time duration;
 
     public Movie() {}
 
-    public int getId() {
+    public long getId() {
         return id;
     }
 

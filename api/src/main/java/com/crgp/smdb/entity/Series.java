@@ -10,12 +10,12 @@ public class Series extends Production {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private long id;
     private int numberOfSeasons;
 
     public Series() {}
 
-    public int getId() {
+    public long getId() {
         return id;
     }
 
