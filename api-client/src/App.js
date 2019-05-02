@@ -1,8 +1,10 @@
 import React, {Component} from 'react';
 
+import Menu from './components/Menu/Menu'
+import Slider from './components/Slider/Slider'
+
 import './App.css';
 
-import Menu from './components/Menu/Menu'
 
 class App extends Component {
   constructor(props) {
@@ -18,6 +20,7 @@ class App extends Component {
     return (
       <div>
         <Menu />
+        <Slider />
       </div>
     );
   }

@@ -1,0 +1,140 @@
+.slider {
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+  position: relative;
+}
+.slider .wrapper {
+  height: 100vh;
+  -webkit-transition: .5s all linear;
+  transition: .5s all linear;
+  will-change: transform;
+}
+.slider .arrows {
+  position: absolute;
+  top: 50%;
+  background: none;
+  height: 60px;
+  border: 0;
+  cursor: pointer;
+  transition: ease .3s all;
+  outline: none;
+}
+.slider .arrows.prev {
+  left: 0;
+}
+.slider .arrows.prev:hover {
+  opacity: .7;
+  left: -10px;
+}
+.slider .arrows.next {
+  right: 0;
+}
+.slider .arrows.next:hover {
+  right: -10px;
+  opacity: .7;
+}
+.slider .dots-container {
+  height: auto;
+  margin: 0;
+  padding: 0;
+  position: absolute;
+  width: auto;
+  text-align: center;
+  left: 50%;
+  bottom: 9px;
+  transform: translateX(-50%);
+  z-index: 10;
+  list-style-type: none;
+}
+.slider .dots-container li {
+  display: inline-block;
+  padding: 5px;
+}
+
+.slider .dots-container li.active {
+  border-bottom: 2px solid #e8a822;
+}
+
+.slider .dots-container li.active a {
+  color: #e8a822;
+}
+
+.slider .dots-container li a {
+  color: #fff;
+}
+.slider .dots-container li a:hover {
+  text-decoration: none;
+  opacity: .7;
+  cursor: pointer;
+}
+.slider .toggle-play {
+  height: auto;
+  position: absolute;
+  width: auto;
+  right: 5%;
+  bottom: 9px;
+  color: #000;
+  z-index: 1000000;
+}
+.slider .toggle-play:hover {
+  text-decoration: none;
+  opacity: .7;
+  cursor: pointer;
+}
+.slider .each-slide {
+  width: 100vw;
+  height: 100vh;
+  float: left;
+  line-height: 100vh;
+  font-size: 40vh;
+  text-align: center;
+  background-size: cover;
+  background-position: center center;
+  background-color: transparent;
+}
+.slider .caption-wrapper{
+  position: absolute;
+  top: 28%;
+  width: 100vw;
+  color: #fff;
+}
+.slider .caption-wrapper h2 {
+  font-size: 58px;
+  font-weight: 200;
+  line-height: 1.2;
+  font-family: 'Muli', sans-serif;
+}
+.slider .caption-wrapper h5 {
+  font-size: 24px;
+  font-family: 'Muli', sans-serif;
+  line-height: 1.6;
+  z-index: 255;
+}
+
+.slider .button-wrapper {
+  width: 100vw;
+  position: absolute;
+  top: 48%;
+  display: flex;
+  justify-content: center;
+}
+
+.slider .slider__button {
+  position: absolute;
+  top: 0;
+  padding: 6px;
+  border-radius: 25px;
+  background:#e8a822;
+  border: 2px solid #e8a822;
+  color: #000;
+  height: auto;
+  width: 100px; 
+}
+
+.slider .slider__button:hover{
+  border: 2px solid #e8a822;
+  color: #e8a822;
+  background: #000;
+}
+
