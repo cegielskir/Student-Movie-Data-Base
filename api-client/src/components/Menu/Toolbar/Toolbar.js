@@ -6,7 +6,7 @@ import Logger from '../Logging/Logging';
 
 import './Toolbar.css';
 
-const logo = require('images/logo-mini-color.png');
+import logo from './logo-mini-color.png'
 
 export default class Toolbar extends Component {
     render() {
@@ -17,7 +17,7 @@ export default class Toolbar extends Component {
                     <div className="toolbar__toggle-button">
                         <DrawerToggleButton click={this.props.drawerClickHandler} />
                     </div>
-                    <div className="toolbar__logo"><a href="/"><img src={logo}/></a></div>
+                    <div className="toolbar__logo"><a href="/"><img alt="logo" src={logo}/></a></div>
                     <div className="spacer" />
                     <Searcher />
                     <div className="spacer" />

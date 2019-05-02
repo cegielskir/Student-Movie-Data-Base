@@ -1,0 +1,21 @@
+.logging__button {
+    border-radius: 25px;
+    background:#e8a822;
+    border: 2px solid #e8a822;
+    color: #000;
+    height: 40px; 
+    margin-left: 10px; 
+}
+
+
+.logging__button:hover{
+    border: 2px solid #e8a822;
+    color: #e8a822;
+    background: #000;
+}
+
+@media (max-width: 768px) {
+    .logging__button {
+        display: none;
+    }
+}

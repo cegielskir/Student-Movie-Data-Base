@@ -1,0 +1,32 @@
+.searcher__controler{
+    position: relative;
+    margin-right: 20px;
+}
+
+#searcher__input {
+    border-radius: 25px;
+    border: 2px solid #000;
+    padding: 20px; 
+    width: 200px;
+    height: 40px;    
+}
+
+.searcher__button {
+    position: absolute;
+    background-color: #e8a822;
+    border-radius: 20px;
+    width: 39px;
+    height: 39px;
+    text-align: center;
+    top: 2px;
+    right: 2px;
+    color: #000;
+    padding-top: 6px; 
+    cursor: pointer;
+}
+
+@media (max-width: 768px) {
+    .searcher__controler {
+        display: none;
+    }
+}

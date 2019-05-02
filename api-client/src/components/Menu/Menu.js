@@ -32,7 +32,7 @@ class Menu extends Component {
       backdrop = <Backdrop click={this.backdropClickHandler} />
     }
     return (
-      <div className="App">
+      <div>
         <Toolbar drawerClickHandler={this.drawerToggleClickHandler} />
         <SideDrawer show={this.state.sideDrawerOpen} />
         {backdrop}
