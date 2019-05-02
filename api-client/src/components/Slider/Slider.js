@@ -45,10 +45,15 @@ export default class Slider extends Component {
 
   intervalBetweenSlides() {
       if (this.state.autoplay === true) {
-          if (this.state.active === this.state.max - 1) {
-              this.state.active = 0;
+          let currSlide = this.state.active;
+          if (currSlide === this.state.max - 1) {
+              this.setState({
+                active: 0
+              }); 
           } else {
-              this.state.active++;
+            this.setState({
+                active: currSlide+1
+            }); 
           }
           this.setState({
               active: this.state.active
@@ -123,16 +128,6 @@ export default class Slider extends Component {
               </div>    
           )
       );
-  }
-
-  renderCheckButton() {
-    return this.state.slides.map( (item, index) => ( 
-            <div className="button-wrapper">
-                <button className="slide-button">Sprawdź</button>
-            </div>
-
-        )
-    );
   }
 
   renderDots() {
