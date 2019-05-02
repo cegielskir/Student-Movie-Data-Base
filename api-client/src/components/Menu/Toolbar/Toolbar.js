@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import { Link } from "react-router-dom";
 
 import DrawerToggleButton from '../SideDrawer/DrawerToggleButton';
 import Searcher from '../Searcher/Searcher';
@@ -25,10 +26,18 @@ export default class Toolbar extends Component {
              
                     <div className="toolbar_navigation-items">
                         <ul>
-                            <li><a href="#">Aktualności</a></li>
-                            <li><a href="#">Filmy</a></li>
-                            <li><a href="#">Seriale</a></li>
-                            <li><a href="#">Rankingi</a></li>
+                            <li>
+                                <Link to="news">Aktualności</Link>
+                            </li>
+                            <li>
+                                <Link to="movies">Filmy</Link>
+                            </li>
+                            <li>
+                                <Link to="series">Seriale</Link>
+                            </li>
+                            <li>
+                                <Link to="rankings">Rankingi</Link>
+                            </li>
                         </ul>
                     </div>
                     <Logger />

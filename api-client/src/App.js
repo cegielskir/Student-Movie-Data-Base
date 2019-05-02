@@ -1,9 +1,15 @@
 import React, {Component} from 'react';
+import { BrowserRouter as Router, Route} from "react-router-dom";
 
 import Menu from './components/Menu/Menu'
-import Slider from './components/Slider/Slider'
+import Home from './components/Home'
 import Footer from  './components/Footer/Footer'
-import Tabs from './components/Movies/Tabs/Tabs'
+
+/*--- pages ---*/
+import News from './components/News'
+import Movies from './components/Movies'
+import Series from './components/Series'
+import Rankings from './components/Rankings'
 
 import './App.css';
 
@@ -22,15 +28,15 @@ class App extends Component {
   render() {
     return (
       <div>
-        <Menu />
-        <Slider />
-        <main>
-          <section id="movies">
-            <div className="container">
-              <Tabs />
-            </div>
-          </section>
-        </main>
+        <Router>
+          <Menu />
+
+            <Route exact path="/" component={Home} />
+            <Route exact path="/news" component={News} />
+            <Route exact path="/movies" component={Movies} />
+            <Route exact path="/series" component={Series} />
+            <Route exact path="/rankings" component={Rankings} />
+        </Router>
 
         <Footer />
       </div>
