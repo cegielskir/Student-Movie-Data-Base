@@ -1,10 +1,15 @@
 import React from 'react';
+import {Link} from 'react-router-dom';
 
 import './Logging.css'
 
 const logging = props => (
     <div className="">
-        <button type="button" className="btn btn-outline-secondary btn-rounded waves-effect logging__button">Zaloguj się</button>
+     <Link to="/signup">
+        <button type="button" className="btn btn-outline-secondary btn-rounded waves-effect logging__button">
+           Zaloguj się
+        </button>
+        </Link>
     </div>
 );
 

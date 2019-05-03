@@ -10,6 +10,11 @@ import News from './components/News'
 import Movies from './components/Movies'
 import Series from './components/Series'
 import Rankings from './components/Rankings'
+
+/*-- logging page --*/
+import Logging from './components/Logging'
+
+/*-- each item page --*/
 import Item from './components/Item'
 
 import './App.css';
@@ -37,6 +42,8 @@ class App extends Component {
             <Route exact path="/movies" component={Movies} />
             <Route exact path="/series" component={Series} />
             <Route exact path="/rankings" component={Rankings} />
+
+            <Route exact path="/signup" component={Logging} />
 
             <Route path="/movie/:id" component={Item} />
         </Router>
