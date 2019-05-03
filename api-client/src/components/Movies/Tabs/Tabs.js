@@ -1,8 +1,8 @@
 import React, {Component} from 'react';
 
-import Client from '../../../api/client'
+import Client from '../../../api/client';
 
-import './Tab.css'
+import './Tab.css';
 
 export default class AppTabs extends React.Component {
   constructor(props) {
@@ -42,6 +42,7 @@ export default class AppTabs extends React.Component {
            <Tab label="Popularne">
              <div>
               <Client />
+
              </div>
            </Tab>
            <Tab label="Często recenzowane">

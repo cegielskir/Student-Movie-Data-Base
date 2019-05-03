@@ -139,7 +139,7 @@ export default class Slider extends Component {
               key={ index } 
               ref='dots' 
               onClick={ this.dots.bind(this, index) } >
-                  <a>&#9679;</a>
+                  <i>&#9679;</i>
               </li> 
           )
       );
@@ -212,11 +212,11 @@ export default class Slider extends Component {
                       { this.renderDots() }
                   </ul>
 
-                  <a 
+                  <i 
                   className='toggle-play' 
                   onClick={ this.toggleAutoPlay.bind(this) }> 
                       { this.renderPlayStop() }
-                  </a>
+                  </i>
 
               </div>
           </div>

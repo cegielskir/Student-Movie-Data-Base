@@ -56,14 +56,14 @@
   border-bottom: 2px solid #e8a822;
 }
 
-.slider .dots-container li.active a {
+.slider .dots-container li.active i {
   color: #e8a822;
 }
 
-.slider .dots-container li a {
+.slider .dots-container li i {
   color: #fff;
 }
-.slider .dots-container li a:hover {
+.slider .dots-container li i:hover {
   text-decoration: none;
   opacity: .7;
   cursor: pointer;

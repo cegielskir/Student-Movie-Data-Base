@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link} from "react-router-dom";
 
 import { ACCESS_TOKEN, API_BASE_URL } from './constants'
 
@@ -60,23 +61,19 @@ class Client extends Component {
         isAuthenticated: true,
         isLoading: false
       });
-      const result = JSON.stringify(response);
-      console.log(result)
-      //console.log('OK')
     }).catch(error => {
       this.setState({
         isLoading: false
       });
-      //console.log('ERROR' + error)
     });
   }
   
   renderMovies() {
   return this.state.movieList.map( (item, index) => (
-        <div className="col-md-2">
+        <div key={ index } className="col-md-2">
         <p  
         key={ index }>
-            {item.title}
+            <Link to={`movie/${item.title}`}>{item.title}</Link>
         </p>
         </div>
         )
@@ -86,8 +83,8 @@ class Client extends Component {
 
     render() {
       return (
-        <div class="container">
-        <div class="row">
+        <div className="container">
+        <div className="row">
             {this.renderMovies()}
         </div>
         </div>

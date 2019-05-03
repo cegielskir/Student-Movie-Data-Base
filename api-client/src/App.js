@@ -10,6 +10,7 @@ import News from './components/News'
 import Movies from './components/Movies'
 import Series from './components/Series'
 import Rankings from './components/Rankings'
+import Item from './components/Item'
 
 import './App.css';
 
@@ -36,6 +37,8 @@ class App extends Component {
             <Route exact path="/movies" component={Movies} />
             <Route exact path="/series" component={Series} />
             <Route exact path="/rankings" component={Rankings} />
+
+            <Route path="/movie/:id" component={Item} />
         </Router>
 
         <Footer />
