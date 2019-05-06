@@ -38,21 +38,46 @@ export default class AppTabs extends React.Component {
                <img alt="" src="https://m.media-amazon.com/images/M/MV5BMjMxNjY2MDU1OV5BMl5BanBnXkFtZTgwNzY1MTUwNTM@._V1_SX300.jpg"/>
              </div>
             </div>
+            <Client />
            </Tab>
            <Tab label="Popularne">
              <div>
+              <div className="row">  
+                <div className="col-md-2 div-mock-black"><div className="img-mock-black"><p>Popularne</p></div></div>
+                <div className="col-md-2 div-mock-black"><div className="img-mock-black"></div></div>
+                <div className="col-md-2 div-mock-black"><div className="img-mock-black"></div></div>
+                <div className="col-md-2 div-mock-black"><div className="img-mock-black"></div></div>
+                <div className="col-md-2 div-mock-black"><div className="img-mock-black"></div></div>
+                <div className="col-md-2 div-mock-black"><div className="img-mock-black"></div></div>
+              </div>
               <Client />
 
              </div>
            </Tab>
            <Tab label="Często recenzowane">
              <div>
-               <p>Często recenzowane</p>
+             <div className="row">  
+                <div className="col-md-2 div-mock-black"><div className="img-mock-black"><p>Często recenzowane</p></div></div>
+                <div className="col-md-2 div-mock-black"><div className="img-mock-black"></div></div>
+                <div className="col-md-2 div-mock-black"><div className="img-mock-black"></div></div>
+                <div className="col-md-2 div-mock-black"><div className="img-mock-black"></div></div>
+                <div className="col-md-2 div-mock-black"><div className="img-mock-black"></div></div>
+                <div className="col-md-2 div-mock-black"><div className="img-mock-black"></div></div>
+              </div>
+              <Client />
              </div>
            </Tab>
            <Tab label="Najwyżej oceniane">
              <div>
-               <p>Najwyżej oceniane</p>
+             <div className="row">  
+                <div className="col-md-2 div-mock-black"><div className="img-mock-black"><p>Najwyżej oceniane</p></div></div>
+                <div className="col-md-2 div-mock-black"><div className="img-mock-black"></div></div>
+                <div className="col-md-2 div-mock-black"><div className="img-mock-black"></div></div>
+                <div className="col-md-2 div-mock-black"><div className="img-mock-black"></div></div>
+                <div className="col-md-2 div-mock-black"><div className="img-mock-black"></div></div>
+                <div className="col-md-2 div-mock-black"><div className="img-mock-black"></div></div>
+              </div>
+              <Client />
              </div>
            </Tab>
          </Tabs>

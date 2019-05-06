@@ -14,7 +14,7 @@ class ItemDetails extends Component {
                         <p>{details.Runtime}</p>
                         <p>{details.Plot}</p>
                         <h5>Szczegóły</h5>
-                        <div className="row">
+                        <div className="all row">
                         <div className="col-md-2">
                             <p>Reżyseria:</p>
                             <p>Scenariusz:</p>

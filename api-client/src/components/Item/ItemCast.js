@@ -6,7 +6,7 @@ class ItemCast extends Component {
         return (
             <div>
                 {actors !== undefined ? actors.split(",").map(actor => {
-                    return <li><a>{actor}</a></li>    
+                    return <li><a href="/">{actor}</a></li>    
                 }) 
                 : null
                 }

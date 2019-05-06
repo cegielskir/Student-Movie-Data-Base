@@ -1,3 +1,10 @@
+.footer-links {
+    color: #fff;
+    padding: 30px 0;
+    height: auto;
+    background-color: rgba(0, 0, 0, 0.86); 
+}
+
 .footer {
     height: auto;
     background-color: #000;

@@ -83,10 +83,9 @@ class Client extends Component {
 
     render() {
       return (
-        <div className="container">
+
         <div className="row">
             {this.renderMovies()}
-        </div>
         </div>
       );
     }

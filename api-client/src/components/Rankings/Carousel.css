@@ -1,0 +1,34 @@
+.div-mock {
+    padding: 15px;
+    height: 270px;
+    text-align: center;
+}
+.img-mock {
+    border: 1px solid #fff;
+    height: 100%;   
+}
+.div-mock-black {
+
+    padding: 0 15px;
+    height: 237.33px;
+
+}
+.img-mock-black {
+    border: 1px solid #000;
+    height: 100%;   
+}
+.mock-caption {
+    position: absolute;
+    bottom: 20px;
+    width: calc(100% - 30px);
+    text-align: center;
+}
+
+.reviews__button {
+    padding: 8px 18px;
+    border-radius: 25px;
+    background:#e8a822;
+    border: 2px solid #e8a822;
+    color: #000;
+    height: auto;
+  }
