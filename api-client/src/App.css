@@ -65,3 +65,8 @@ section {
 .section-title {
     margin-bottom: 30px;
 }
+
+.not__found {
+    text-align: center;
+    margin: 300px 0;
+}

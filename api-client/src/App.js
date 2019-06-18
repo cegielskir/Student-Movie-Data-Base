@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import { BrowserRouter as Router, Route} from "react-router-dom";
+import { BrowserRouter as Router, Route, Switch} from "react-router-dom";
 
 import Menu from './components/Menu/Menu'
 import Home from './components/Home'
@@ -16,6 +16,9 @@ import Logging from './components/Logging'
 
 /*-- each item page --*/
 import Item from './components/Item'
+
+/*-- not found page --*/
+import NotFound from './components/NotFound'
 
 import './App.css';
 
@@ -36,16 +39,18 @@ class App extends Component {
       <div>
         <Router>
           <Menu />
+            <Switch>
+              <Route exact path="/" component={Home} />
+              <Route path="/news" component={News} />
+              <Route path="/movies" component={Movies} />
+              <Route path="/series" component={Series} />
+              <Route path="/rankings" component={Rankings} />
 
-            <Route exact path="/" component={Home} />
-            <Route exact path="/news" component={News} />
-            <Route exact path="/movies" component={Movies} />
-            <Route exact path="/series" component={Series} />
-            <Route exact path="/rankings" component={Rankings} />
+              <Route path="/signup" component={Logging} />
 
-            <Route exact path="/signup" component={Logging} />
-
-            <Route path="/movie/:id" component={Item} />
+              <Route path="/movie/:id" component={Item} />
+              <Route component={NotFound} />
+            </Switch>
         </Router>
 
         <Footer />

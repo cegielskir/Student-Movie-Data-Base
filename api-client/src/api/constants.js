@@ -1,2 +1,2 @@
-export const ACCESS_TOKEN = 'eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIyIiwiaWF0IjoxNTU2ODc5NjYzLCJleHAiOjE1NTc0ODQ0NjN9.vn3CIui7doqpI-bUu6mULD1QLGB6bV2avHtatuX8wOiRARQO7FVV94znGUzDFjkI3ZaROVZ4gFrKnNFkfS6TRw';
+export const ACCESS_TOKEN = 'eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIzIiwiaWF0IjoxNTYwNzg5MjgyLCJleHAiOjE1NjEzOTQwODJ9.2wO_Wkom1fWQtr2uRbzYO2F2qjbcX5Cb103KVn-TFQxsP_g3iYexuWev0xoscb5EtMdXQ96kRUTyghqeDoVo0g';
 export const API_BASE_URL = 'http://localhost:5000/api';
