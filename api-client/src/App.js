@@ -11,8 +11,9 @@ import Movies from './components/Movies'
 import Series from './components/Series'
 import Rankings from './components/Rankings'
 
-/*-- logging page --*/
+/*-- registration and logging page --*/
 import Logging from './components/Logging'
+import Registration from './components/Registration'
 
 /*-- each item page --*/
 import Item from './components/Item'
@@ -46,7 +47,8 @@ class App extends Component {
               <Route path="/series" component={Series} />
               <Route path="/rankings" component={Rankings} />
 
-              <Route path="/signup" component={Logging} />
+              <Route path="/login" component={Logging} />
+              <Route path="/signup" component={Registration} />
 
               <Route path="/movie/:id" component={Item} />
               <Route component={NotFound} />

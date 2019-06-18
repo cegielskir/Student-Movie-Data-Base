@@ -3,20 +3,32 @@ import { Redirect } from 'react-router-dom';
 
 import { API_BASE_URL } from '../api/constants';
 
-export default class Logging extends Component {
+export default class Registration extends Component {
     constructor(props) {
         super(props);
 
         this.state = {
+            name: '',
+            username: '',
             email: '',
             password: '',
-            accessToken: null,
+            registrationSuccess: null, 
         }
 
+        this.handleNameChange = this.handleNameChange.bind(this);
+        this.handleUserNameChange = this.handleUserNameChange.bind(this);
         this.handleEmailChange = this.handleEmailChange.bind(this);
         this.handlePasswordChange = this.handlePasswordChange.bind(this);
-        this.loginUser = this.loginUser.bind(this);
+        this.registerUser = this.registerUser.bind(this);
 
+    }
+
+    handleNameChange(event) {
+        this.setState({name: event.target.value});
+    }
+
+    handleUserNameChange(event) {
+        this.setState({username: event.target.value});
     }
 
     handleEmailChange(event) {
@@ -27,15 +39,17 @@ export default class Logging extends Component {
         this.setState({password: event.target.value});
     }
 
-    loginUser() {
-        fetch(API_BASE_URL+'/auth/signin', {
+    registerUser() {
+        fetch(API_BASE_URL+'/auth/signup', {
             method: 'POST',
             headers: {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify({
-                "usernameOrEmail": this.state.email,
+                "email": this.state.email,
+                "username": this.state.username,
+                "name": this.state.name,
                 "password": this.state.password            
             })
             }
@@ -43,23 +57,23 @@ export default class Logging extends Component {
         .then(response => {
             console.log(response)
             if(response.ok){
-                return response;
+                this.setState({
+                    registrationSuccess: true,
+                });
             } 
-            throw Error("Fetch error")
-        })
-        .then(response => response.json())
-        .then(response => {
-            this.setState({
-                accessToken: response.accessToken
-            })
+            else throw Error("Fetch error")
         })
         .catch(err => {
             console.log(err);
+            this.setState(prevState => ({
+                registrationSuccess: false,
+            }))
         });
     }
 
     render() {
         console.log(this.state)
+        if(this.state.registrationSuccess) return <Redirect to={{ pathname: "/login" }} />
         return (
           <div>
             <main>
@@ -67,8 +81,16 @@ export default class Logging extends Component {
                     <div className="container">
                         <div className="row">
                             <div className="col-md-5">
-                                <h3>Zaloguj się</h3>
+                                <h3>Załóż konto</h3>
                                 <form>
+                                    <div className="form-group">
+                                        <label>Imię i nazwisko</label>
+                                        <input type="text" onChange={this.handleNameChange} className="form-control" id="name" placeholder="Imię i nazwisko" />
+                                    </div>
+                                    <div className="form-group">
+                                        <label>Nickname</label>
+                                        <input type="text" onChange={this.handleUserNameChange} className="form-control" id="username" placeholder="Nickname" />
+                                    </div>
                                     <div className="form-group">
                                         <label>Email</label>
                                         <input type="email" onChange={this.handleEmailChange} className="form-control" id="email" placeholder="Email" />
@@ -77,7 +99,11 @@ export default class Logging extends Component {
                                         <label>Hasło</label>
                                         <input type="password" onChange={this.handlePasswordChange} className="form-control" id="password" placeholder="Hasło" />
                                     </div>
-                                    <button type="button" onClick={this.loginUser} className="btn btn-outline-secondary btn-rounded waves-effect account__button">Załóż konto</button>
+                                    <div className="form-check">
+                                        <input type="checkbox" className="form-check-input" id="exampleCheck1" required/>
+                                        <label className="form-check-label" >Akceptuję regulamin serwisu SMDb wraz z jego Politykę Prywatności oraz zasadami pokrewnymi.</label>
+                                    </div>
+                                    <button type="button" onClick={this.registerUser} className="btn btn-outline-secondary btn-rounded waves-effect account__button">Załóż konto</button>
                                 </form>
                             </div>
                             <div className="col-md-2">
