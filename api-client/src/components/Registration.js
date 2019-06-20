@@ -60,6 +60,7 @@ export default class Registration extends Component {
                 this.setState({
                     registrationSuccess: true,
                 });
+                this.props.history.push("/login");
             } 
             else throw Error("Fetch error")
         })
@@ -73,7 +74,7 @@ export default class Registration extends Component {
 
     render() {
         console.log(this.state)
-        if(this.state.registrationSuccess) return <Redirect to={{ pathname: "/login" }} />
+
         return (
           <div>
             <main>

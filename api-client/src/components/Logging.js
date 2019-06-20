@@ -11,6 +11,7 @@ export default class Logging extends Component {
             email: '',
             password: '',
             accessToken: null,
+            success: false
         }
 
         this.handleEmailChange = this.handleEmailChange.bind(this);
@@ -41,7 +42,7 @@ export default class Logging extends Component {
             }
         )
         .then(response => {
-            console.log(response)
+            //console.log(response)
             if(response.ok){
                 return response;
             } 
@@ -49,6 +50,7 @@ export default class Logging extends Component {
         })
         .then(response => response.json())
         .then(response => {
+            localStorage.setItem('accessToken', response.accessToken);
             this.setState({
                 accessToken: response.accessToken
             })
@@ -59,7 +61,12 @@ export default class Logging extends Component {
     }
 
     render() {
-        console.log(this.state)
+        //console.log(this.props)
+        if(this.state.accessToken) {
+            setTimeout(() => {
+                this.props.history.push(`/`);
+            }, 3000);
+        } 
         return (
           <div>
             <main>
@@ -98,6 +105,7 @@ export default class Logging extends Component {
                     </div>
                 </section>
             </main>
+            {this.props.children}
           </div>
         );
       }

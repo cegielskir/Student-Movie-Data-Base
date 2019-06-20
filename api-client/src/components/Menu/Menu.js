@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import { withRouter } from 'react-router-dom';
 
 import Toolbar from './Toolbar/Toolbar';
 import SideDrawer from './SideDrawer/SideDrawer';
@@ -10,10 +11,6 @@ class Menu extends Component {
     this.state = {
       sideDrawerOpen: false
     }
-  }
-
-  componentDidMount() {
-
   }
 
   drawerToggleClickHandler = () => {
@@ -33,12 +30,13 @@ class Menu extends Component {
     }
     return (
       <div>
-        <Toolbar drawerClickHandler={this.drawerToggleClickHandler} />
+        <Toolbar authenticated={this.props.authenticated} drawerClickHandler={this.drawerToggleClickHandler} />
         <SideDrawer show={this.state.sideDrawerOpen} />
         {backdrop}
+
       </div>
     );
   }
 }
 
-export default Menu;
+export default withRouter(Menu);

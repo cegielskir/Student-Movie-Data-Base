@@ -7,9 +7,12 @@ import Logger from '../Logging/Logging';
 
 import './Toolbar.css';
 
-import logo from './logo-mini-color.png'
+import logo from './logo-mini-color.png';
 
 export default class Toolbar extends Component {
+    constructor(props) {
+        super(props);
+    }
     render() {
         return (
             <header className="toolbar">
@@ -40,7 +43,7 @@ export default class Toolbar extends Component {
                             </li>
                         </ul>
                     </div>
-                    <Logger />
+                    { this.props.authenticated ? <div>Howdy</div> : <Logger />}
                     
                 </nav>
                 </div>
