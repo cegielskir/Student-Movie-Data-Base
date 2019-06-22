@@ -3,6 +3,10 @@ package com.crgp.smdb.config;
 import com.crgp.smdb.security.CustomUserDetailsService;
 import com.crgp.smdb.security.JwtAuthenticationEntryPoint;
 import com.crgp.smdb.security.JwtAuthenticationFilter;
+import com.crgp.smdb.security.oauth2.CustomOAuth2UserService;
+import com.crgp.smdb.security.oauth2.HttpCookieOAuth2AuthorizationRequestRepository;
+import com.crgp.smdb.security.oauth2.OAuth2AuthenticationFailureHandler;
+import com.crgp.smdb.security.oauth2.OAuth2AuthenticationSuccessHandler;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -30,12 +34,29 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     CustomUserDetailsService customUserDetailsService;
 
+//    @Autowired
+//    private JwtAuthenticationEntryPoint unauthorizedHandler;
+
     @Autowired
-    private JwtAuthenticationEntryPoint unauthorizedHandler;
+    private CustomOAuth2UserService customOAuth2UserService;
+
+    @Autowired
+    private OAuth2AuthenticationSuccessHandler oAuth2AuthenticationSuccessHandler;
+
+    @Autowired
+    private OAuth2AuthenticationFailureHandler oAuth2AuthenticationFailureHandler;
+
+    @Autowired
+    private HttpCookieOAuth2AuthorizationRequestRepository httpCookieOAuth2AuthorizationRequestRepository;
 
     @Bean
     public JwtAuthenticationFilter jwtAuthenticationFilter() {
         return new JwtAuthenticationFilter();
+    }
+
+    @Bean
+    public HttpCookieOAuth2AuthorizationRequestRepository cookieAuthorizationRequestRepository() {
+        return new HttpCookieOAuth2AuthorizationRequestRepository();
     }
 
     @Override
@@ -60,17 +81,18 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http
                 .cors()
-                .and()
+                    .and()
                 .csrf()
-                .disable()
+                    .disable()
                 .exceptionHandling()
-                .authenticationEntryPoint(unauthorizedHandler)
-                .and()
+                    .authenticationEntryPoint(new JwtAuthenticationEntryPoint())
+                    .and()
                 .sessionManagement()
-                .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-                .and()
+                    .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+                    .and()
                 .authorizeRequests()
-                .antMatchers("/",
+                    .antMatchers("/",
+                        "/error",
                         "/favicon.ico",
                         "/**/*.png",
                         "/**/*.gif",
@@ -79,15 +101,29 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                         "/**/*.html",
                         "/**/*.css",
                         "/**/*.js")
-                .permitAll()
-                .antMatchers("/api/auth/**")
-                .permitAll()
-                .antMatchers("/api/user/checkUsernameAvailability", "/api/user/checkEmailAvailability")
-                .permitAll()
-                .antMatchers(HttpMethod.GET, "/api/polls/**", "/api/users/**")
-                .permitAll()
-                .anyRequest()
-                .authenticated();
+                        .permitAll()
+                    .antMatchers("/api/auth/**", "/api/oauth2/**")
+                        .permitAll()
+                    .antMatchers("/api/user/checkUsernameAvailability", "/api/user/checkEmailAvailability")
+                        .permitAll()
+                    .antMatchers(HttpMethod.GET, "/api/polls/**", "/api/users/**")
+                        .permitAll()
+                    .anyRequest()
+                        .authenticated()
+                        .and()
+                .oauth2Login()
+                    .authorizationEndpoint()
+                        .baseUri("/api/oauth2/authorize")
+                        .authorizationRequestRepository(cookieAuthorizationRequestRepository())
+                        .and()
+                    .redirectionEndpoint()
+                        .baseUri("/api/oauth2/callback/*")
+                        .and()
+                    .userInfoEndpoint()
+                        .userService(customOAuth2UserService)
+                        .and()
+                    .successHandler(oAuth2AuthenticationSuccessHandler)
+                    .failureHandler(oAuth2AuthenticationFailureHandler);
 
         // Add our custom JWT security filter
         http.addFilterBefore(jwtAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class);

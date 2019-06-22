@@ -1,5 +1,6 @@
 package com.crgp.smdb.security;
 
+import com.crgp.smdb.config.AppProperties;
 import io.jsonwebtoken.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -12,6 +13,12 @@ import java.util.Date;
 public class JwtTokenProvider {
 
     private static final Logger logger = LoggerFactory.getLogger(JwtTokenProvider.class);
+
+    private AppProperties appProperties;
+
+    public JwtTokenProvider(AppProperties appProperties) {
+        this.appProperties = appProperties;
+    }
 
     @Value("${app.jwtSecret}")
     private String jwtSecret;

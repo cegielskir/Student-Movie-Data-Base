@@ -1,5 +1,6 @@
 package com.crgp.smdb.controller;
 
+import com.crgp.smdb.entity.AuthProvider;
 import com.crgp.smdb.entity.Role;
 import com.crgp.smdb.entity.RoleName;
 import com.crgp.smdb.entity.User;
@@ -86,6 +87,7 @@ public class AuthController {
                 .orElseThrow(() -> new AppException("User Role not set."));
 
         user.setRoles(Collections.singleton(userRole));
+        user.setProvider(AuthProvider.local);
 
         User result = userRepository.save(user);
 
