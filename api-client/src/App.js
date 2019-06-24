@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import { BrowserRouter as Router, Route, Switch} from "react-router-dom";
+import OAuth2RedirectHandler from './oauth2/OAuth2RedirectHandler';
 
 import Menu from './components/Menu/Menu'
 import Home from './components/Home'
@@ -71,6 +72,8 @@ class App extends Component {
               <Route path="/user" component={User} />
 
               <Route path="/movie/:id" component={Item} />
+
+              <Route path="/oauth2/redirect" component={OAuth2RedirectHandler}></Route> 
               <Route component={NotFound} />
             </Switch>
         </Router>
