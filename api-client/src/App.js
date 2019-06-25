@@ -34,12 +34,6 @@ class App extends Component {
     };
   }
 
-  componentWillReceiveProps(props) {
-    console.log('propsy Pawle', this.props)
-  }
-  shouldComponentUpdate(props) {
-    console.log('should')
-  }
   componentDidMount(props) {
     console.log('mount')
     if(localStorage.getItem('accessToken')){
@@ -48,12 +42,10 @@ class App extends Component {
       })
     }
   }
-  static getDerivedStateFromProps(nextProps, prevState){
-    console.log('czas na propsy')
-  }
 
   render() {
-    console.log('render', this.props)
+    //console.log('render', this.props)
+
     return (
       <div>
 

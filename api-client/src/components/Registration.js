@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
-import { Redirect } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 
-import { API_BASE_URL } from '../api/constants';
+import { API_BASE_URL, GOOGLE_AUTH_URL, FACEBOOK_AUTH_URL } from '../api/constants';
 
 export default class Registration extends Component {
     constructor(props) {
@@ -38,6 +38,11 @@ export default class Registration extends Component {
     handlePasswordChange(event) {
         this.setState({password: event.target.value});
     }
+
+    handleRedirect(url) {
+        console.log('lets redirect')
+        window.location.assign(url);
+      }
 
     registerUser() {
         fetch(API_BASE_URL+'/auth/signup', {
@@ -114,12 +119,17 @@ export default class Registration extends Component {
                             </div>
                             <div className="col-md-5">
                                 <h3>Połącz z istniejącym kontem</h3>
+                                <a href={FACEBOOK_AUTH_URL}>
                                 <button className="btn btn-outline-secondary btn-rounded waves-effect fb external-login">
                                     Zaloguj się kontem Facebook
                                 </button>
+                                </a>
+                                <a href={GOOGLE_AUTH_URL}>
                                 <button className="btn btn-outline-secondary btn-rounded waves-effect google external-login">
                                     Zaloguj się kontem Google
                                 </button>
+                                </a>
+                        
                             </div>
                         </div>
                     </div>
