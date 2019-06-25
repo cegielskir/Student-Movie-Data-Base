@@ -19,6 +19,7 @@ import Registration from './components/Registration'
 
 /*-- each item page --*/
 import Item from './components/Item'
+import Review from './components/Review'
 
 /*-- not found page --*/
 import NotFound from './components/NotFound'
@@ -62,13 +63,16 @@ class App extends Component {
               <Route path="/user" component={User} />
 
               <Route path="/movie/:id" component={Item} />
+              <Route path="/review/:id" component={Review} />
 
               <Route path="/oauth2/redirect" component={OAuth2RedirectHandler}></Route> 
               <Route component={NotFound} />
             </Switch>
+
+            <Footer />
         </Router>
 
-        <Footer />
+
       </div>
     );
   }

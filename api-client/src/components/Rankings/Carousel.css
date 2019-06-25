@@ -46,5 +46,10 @@
 
   .rating__img {
       max-width: 100%;
-    opacity: 0.8;
+    opacity: 0.75;
   }
+
+.rating__img:hover {
+    max-width: 100%;
+  opacity: 1;
+}

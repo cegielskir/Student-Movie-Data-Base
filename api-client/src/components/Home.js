@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import { Link } from 'react-router-dom';
 
 import Slider from './Slider/Slider'
 import Tabs from './Movies/Tabs/Tabs'
@@ -30,27 +31,29 @@ export default class Home extends Component {
                   <div className="row">
                     <div className="col-md-6">
                       <Card style={{ width: '100%' }}>
-                        <CardImg style={{ padding: '12px' }} variant="top" src="https://images.unsplash.com/photo-1482678264299-6eb83b49cb42?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1052&q=80" />
+                        <CardImg style={{ padding: '12px' }} variant="top" src="http://iammyrongaines.com/wp-content/uploads/2018/10/dark-netflix-series-785x450.jpg" />
                         <CardBody>
-                          <CardTitle>Lorem ipsum</CardTitle>
+                          <CardTitle>Allein in der Dunkelheit</CardTitle>
                           <CardText>
-                          Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                          Quisque erat mi, dictum pulvinar felis vitae, imperdiet dapibus felis. 
+                          "Dark" to niezwykła saga rozgrywająca się we współczesnych Niemczech. Zaginięcie dwojga małych dzieci...
                           </CardText>
+                          <Link to="/review/Allein in der Dunkelheit">
                           <button type="button" className="btn btn-outline-secondary btn-rounded waves-effect reviews__button ">Zobacz recenzje</button>
+                          </Link>
                         </CardBody>
                       </Card>
                     </div>
                     <div className="col-md-6">
                     <Card style={{ width: '100%' }}>
-                        <CardImg style={{ padding: '12px' }} variant="top" src="https://images.unsplash.com/photo-1456030680012-9aa5bd962cc4?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1050&q=80" />
+                        <CardImg style={{ padding: '12px' }} variant="top" src="https://edge.slashgear.com/wp-content/uploads/2018/04/142027593-980x620.jpg" />
                         <CardBody>
-                        <CardTitle>Lorem ipsum</CardTitle>
+                        <CardTitle>Ścieżka rowerowa</CardTitle>
                           <CardText>
-                          Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                          Quisque erat mi, dictum pulvinar felis vitae, imperdiet dapibus felis. 
+                          Chyba każdy z nas marzył o świecie magicznym, w którym mógłby stać się bohaterem i stawić czoła najstraszliwszym... 
                           </CardText>
+                          <Link to="/review/sciezka rowerowa">
                           <button type="button" className="btn btn-outline-secondary btn-rounded waves-effect reviews__button ">Zobacz recenzje</button>
+                          </Link>
                         </CardBody>
                       </Card>
                     </div>

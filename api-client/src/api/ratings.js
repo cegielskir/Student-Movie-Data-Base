@@ -64,7 +64,6 @@ class RatingProvider extends Component {
     let posters = this.state.moviesPosters.reverse();
     return this.state.ratingsList.reverse().slice(0, 6).map( (item, index) => (
         <div key={ index } className="col-md-2 div-mock">
-                <div className="rating__overlay"></div>
                 <img className="rating__img" alt={index} src={posters[index].posterUrl } />
                 <div className="mock-caption">
                     <i className="fa fa-star"></i> { item.value }
