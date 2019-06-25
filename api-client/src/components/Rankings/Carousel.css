@@ -2,11 +2,22 @@
     padding: 15px;
     height: 270px;
     text-align: center;
+    position: relative;
 }
 .img-mock {
     border: 1px solid #fff;
     height: 100%;   
+    position: relative;
 }
+
+.rating__overlay {
+    position: absolute;
+    background: rgba(0, 0, 0, 0.2);
+    z-index: 999;
+    height: 100%;
+    width: 100%;
+}
+
 .div-mock-black {
 
     padding: 0 15px;
@@ -31,4 +42,9 @@
     border: 2px solid #e8a822;
     color: #000;
     height: auto;
+  }
+
+  .rating__img {
+      max-width: 100%;
+    opacity: 0.8;
   }

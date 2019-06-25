@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 
-import Client from '../../../api/client';
+import MovieProvider from '../../../api/client';
 
 import './Tab.css';
 
@@ -18,22 +18,22 @@ export default class AppTabs extends React.Component {
           <h1>FILMY</h1>
          <Tabs>
            <Tab label="Popularne">
-            <Client type="popular"/>
+            <MovieProvider type="popular"/>
            </Tab>
            <Tab label="Nadchodzące">
              <div>
-              <Client type="coming-soon"/>
+              <MovieProvider type="coming-soon"/>
 
              </div>
            </Tab>
            <Tab label="Często recenzowane">
              <div>
-              <Client type="most-reviewed"/>
+              <MovieProvider type="most-reviewed"/>
              </div>
            </Tab>
            <Tab label="Najwyżej oceniane">
              <div>
-              <Client type="best-rated"/>
+              <MovieProvider type="best-rated"/>
              </div>
            </Tab>
          </Tabs>

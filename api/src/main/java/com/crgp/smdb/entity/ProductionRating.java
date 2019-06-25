@@ -1,5 +1,7 @@
 package com.crgp.smdb.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 
 @Entity
@@ -11,6 +13,7 @@ public class ProductionRating extends Rating{
     private int id;
 
     @ManyToOne
+    @JsonIgnore
     @JoinColumn(name = "production_id")
     private Production production;
 

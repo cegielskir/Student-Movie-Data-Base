@@ -34,7 +34,7 @@ function getCurrentUser() {
     });
 }
 
-class Client extends Component {
+class MovieProvider extends Component {
     constructor(props) {
       super(props);
       this.state = {
@@ -73,7 +73,7 @@ class Client extends Component {
 
   switch(type) {
     case 'popular': resultList = resultList.slice(0, 6); break;
-    case 'coming-soon': resultList = resultList.filter(item => { return new Date(item.premiereDate).getTime() > Date.now() })
+    case 'coming-soon': resultList = resultList.filter(item => { return new Date(item.premiereDate).getTime() > Date.now() }); break;
     case 'most-reviewed': resultList = resultList.slice(0, 3); break;
     case 'best-rated': resultList = resultList.reverse().slice(0, 3); break;
     default: break;
@@ -93,7 +93,6 @@ class Client extends Component {
 
 
     render() {
-      //console.log(this.props);
       return (
 
         <div className="row">
@@ -104,4 +103,4 @@ class Client extends Component {
   }
   
   
-  export default Client;
+  export default MovieProvider;

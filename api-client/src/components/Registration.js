@@ -1,5 +1,4 @@
 import React, {Component} from 'react';
-import { Link, Redirect } from 'react-router-dom';
 
 import { API_BASE_URL, GOOGLE_AUTH_URL, FACEBOOK_AUTH_URL } from '../api/constants';
 

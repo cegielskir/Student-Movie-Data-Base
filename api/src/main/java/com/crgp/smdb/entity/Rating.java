@@ -1,5 +1,7 @@
 package com.crgp.smdb.entity;
 
+import org.hibernate.annotations.DiscriminatorOptions;
+
 import javax.persistence.*;
 import javax.validation.constraints.DecimalMin;
 import javax.validation.constraints.DecimalMax;
@@ -8,6 +10,7 @@ import java.math.BigDecimal;
 @Entity
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @DiscriminatorColumn(name = "rating_type")
+@DiscriminatorOptions(force=true)
 public abstract class Rating {
 
     @Id

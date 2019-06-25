@@ -1,4 +1,4 @@
-export const ACCESS_TOKEN = 'eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIyIiwiaWF0IjoxNTYxNDA2NjIzLCJleHAiOjE1NjIyNzA2MjN9.KIz3vaLgnQ_oKz0qmIkFMBczkt6VMoBWi0mp-V6pf_ucneoDvRdsz8JjdMLtqC8dkoCV8xHGgNCHBPe8IHTLkA';
+export const ACCESS_TOKEN = 'eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiI0IiwiaWF0IjoxNTYxNDQ4OTQ5LCJleHAiOjE1NjIzMTI5NDl9.4-AyQ-4d93N2YhDmodiZf5W_5V_YymeBLD_feQnBV2XNsbuKzJRwtezQMWClMt0UWLTzPzHVY5UDg8cYyxMFvg';
 export const API_BASE_URL = 'http://localhost:5000/api';
 
 export const OAUTH2_REDIRECT_URI = 'http://localhost:3000/oauth2/redirect'
