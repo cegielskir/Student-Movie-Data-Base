@@ -70,3 +70,12 @@ section {
     text-align: center;
     margin: 300px 0;
 }
+
+.header__title {
+    margin-bottom: 20px;
+}
+
+.movie__box__img {
+    margin-top: 16px;
+    max-width: 90%;
+}
