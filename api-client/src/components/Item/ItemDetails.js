@@ -3,6 +3,36 @@ import React, {Component} from 'react';
 import './Item.css';
 
 class ItemDetails extends Component {
+    constructor(props) {
+        super(props);
+
+        this.state = {
+            a: ['', '', '', '', '', '', '', '', '', '']
+        }
+
+        this.changeStars = this.changeStars.bind(this);
+    }
+
+    changeStars = index => {
+        console.log('change stars')
+        let new_a = [];
+        for(let i=0; i<10; i++) {
+            i <= index ? new_a[i] = 'x' : new_a[i] = '';
+        }
+
+        this.setState({
+            a: new_a,
+        })
+    }
+
+    renderStars() {
+        return this.state.a.map( (item, index) => (
+            <button className="stars__button" key={index} onClick={() => this.changeStars(index)}>
+                {this.state.a[index] === '' ? <i key={index + ' ' + index} className="fa fa-star i__star"></i> : <i key={index + ' ' + index} className="fa fa-star i__star mark"></i>}
+            </button>
+        ))
+    }
+
     render() {
         let details = this.props.details;
   
@@ -40,12 +70,16 @@ class ItemDetails extends Component {
                         <span>({details.imdbVotes} ocen)</span>
  
                         </div>
-                        <button type="button" className="btn btn-outline-secondary btn-rounded waves-effect rating-button">Oceń film</button>
+                        { localStorage.getItem('accessToken')
+                         ? <div> 
+                             <p className="p__rating">Oceń film w skali 1-10</p>
+                             {this.renderStars()}
+                         <button type="button" className="btn btn-outline-secondary btn-rounded waves-effect rating-button">Oceń film</button>
+                            </div>
+                         : <p>Zaloguj się aby móc oceniac filmy</p>
+                        }
                     </div>
                 </div>
-
-  
-                
             </div>
         
             );

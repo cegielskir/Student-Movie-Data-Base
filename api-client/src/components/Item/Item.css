@@ -34,3 +34,20 @@
 .rating-button {
     margin: 20px 0;
 }
+.mark {
+    color: #e8a822;
+}
+.stars__button {
+    margin: 0 1px;
+    padding: 0;
+    width: 12px;
+}
+
+.i__star {
+    font-size: 12px;
+}
+
+.p__rating {
+    margin-top: 10px;
+    margin-bottom: 0;
+}

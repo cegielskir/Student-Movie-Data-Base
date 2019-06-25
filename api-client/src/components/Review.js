@@ -11,7 +11,7 @@ function Review({ match }) {
             <div className="container">
                <h1>{match.params.id}</h1>
                <p className="text-justify">
-                    {match.params.id == 'Allein in der Dunkelheit' ? review1 : review2 }
+                    {match.params.id === 'Allein in der Dunkelheit' ? review1 : review2 }
                 </p>
                 <p className="right">dodano przez anonymous</p>
             </div>
