@@ -1,8 +1,9 @@
 package com.crgp.smdb.entity;
 
 import javax.persistence.*;
-import javax.validation.constraints.Max;
-import javax.validation.constraints.Min;
+import javax.validation.constraints.DecimalMin;
+import javax.validation.constraints.DecimalMax;
+import java.math.BigDecimal;
 
 @Entity
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
@@ -13,9 +14,9 @@ public abstract class Rating {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @Min(0)
-    @Max(10)
-    private int value;
+    @DecimalMin("0.0")
+    @DecimalMax("10.0")
+    private BigDecimal value;
 
     @ManyToOne
     @JoinColumn(name = "user_id")
@@ -31,11 +32,11 @@ public abstract class Rating {
         this.id = id;
     }
 
-    public int getValue() {
+    public BigDecimal getValue() {
         return value;
     }
 
-    public void setValue(int value) {
+    public void setValue(BigDecimal value) {
         this.value = value;
     }
 
