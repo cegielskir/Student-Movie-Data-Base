@@ -70,3 +70,12 @@
       margin-left: 0;
     }
   }
+
+  .toolbar__username {
+    color: #fff;
+  }
+
+  .toolbar__userimg {
+    max-height: 20px;
+    margin: 0 0 0 10px;
+  }

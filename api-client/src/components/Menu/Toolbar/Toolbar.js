@@ -8,11 +8,60 @@ import Logger from '../Logging/Logging';
 import './Toolbar.css';
 
 import logo from './logo-mini-color.png';
+import user from './user.png';
+
+const ACCESS_TOKEN = localStorage.getItem('accessToken');
 
 export default class Toolbar extends Component {
     constructor(props) {
         super(props);
+
+        this.state = {
+            userName: 'user'
+        }
     }
+    request = (options) => {
+        const headers = new Headers({
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer ' + ACCESS_TOKEN,
+        })
+    
+        const defaults = {headers: headers};
+        options = Object.assign({}, defaults, options);
+    
+        return fetch(options.url, options)
+        .then(response =>
+            response.json().then(json => {
+                if(!response.ok) {
+                    return Promise.reject(json);
+                }
+                return json;
+            })
+        );
+    };
+    
+    getCurrentUser() {
+        if(!ACCESS_TOKEN) {
+            return Promise.reject("No access token set.");
+        }
+
+        return this.request({
+            url: "http://localhost:5000/user/me",
+            method: 'GET'
+        })
+        .then(response => {
+            this.setState({
+                userName: response.username
+            })
+        }).catch(error => {
+            console.log(error);
+        });
+    }
+
+    componentDidMount() {
+        this.getCurrentUser();
+    }
+
     render() {
         return (
             <header className="toolbar">
@@ -43,7 +92,7 @@ export default class Toolbar extends Component {
                             </li>
                         </ul>
                     </div>
-                    { this.props.authenticated ? <div>Howdy</div> : <Logger />}
+                    { this.props.authenticated ? <div className="toolbar__username"><img className="toolbar__userimg" alt="user" src={user}/> {this.state.userName}</div> : <Logger />}
                     
                 </nav>
                 </div>

@@ -16,6 +16,7 @@ public class Movie extends Production{
 
     private Date premiereDate;
     private Time duration;
+    private String posterUrl;
 
     public Movie() {}
 
@@ -43,7 +44,13 @@ public class Movie extends Production{
         this.duration = duration;
     }
 
+    public String getPosterUrl() {
+        return posterUrl;
+    }
 
+    public void setPosterUrl(String posterUrl) {
+        this.posterUrl = posterUrl;
+    }
 
     @Override
     public String toString() {
@@ -51,6 +58,7 @@ public class Movie extends Production{
                 "id=" + id +
                 ", premiereDate=" + premiereDate +
                 ", duration=" + duration +
+                ", posterUrl=" + posterUrl +
                 '}';
     }
 }

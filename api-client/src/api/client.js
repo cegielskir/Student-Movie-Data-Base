@@ -68,9 +68,20 @@ class Client extends Component {
     });
   }
   
-  renderMovies() {
-  return this.state.movieList.map( (item, index) => (
+  renderMovies(type) {
+  let resultList = this.state.movieList;
+
+  switch(type) {
+    case 'popular': resultList = resultList.slice(0, 6); break;
+    case 'coming-soon': resultList = resultList.filter(item => { return new Date(item.premiereDate).getTime() > Date.now() })
+    case 'most-reviewed': resultList = resultList.slice(0, 3); break;
+    case 'best-rated': resultList = resultList.reverse().slice(0, 3); break;
+    default: break;
+  }
+
+  return resultList.slice(0, 6).map( (item, index) => (
         <div key={ index } className="col-md-2">
+        <img alt={index} src={item.posterUrl} />
         <p  
         key={ index }>
             <Link to={`movie/${item.title}`}>{item.title}</Link>
@@ -82,10 +93,11 @@ class Client extends Component {
 
 
     render() {
+      //console.log(this.props);
       return (
 
         <div className="row">
-            {this.renderMovies()}
+            {this.renderMovies(this.props.type)}
         </div>
       );
     }

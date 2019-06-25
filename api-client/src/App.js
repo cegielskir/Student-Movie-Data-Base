@@ -35,21 +35,19 @@ class App extends Component {
   }
 
   componentDidMount(props) {
-    console.log('mount')
     if(localStorage.getItem('accessToken')){
       this.setState({
         authenticated: true
       })
     }
+    
   }
 
   render() {
-    //console.log('render', this.props)
-
     return (
       <div>
 
-        <Router>
+        <Router forceRefresh={true}>
 
             <Menu authenticated={this.state.authenticated}/>
             <Switch>

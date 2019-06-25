@@ -84,7 +84,7 @@ export default class Logging extends Component {
                                         <label>Hasło</label>
                                         <input type="password" onChange={this.handlePasswordChange} className="form-control" id="password" placeholder="Hasło" />
                                     </div>
-                                    <button type="button" onClick={this.loginUser} className="btn btn-outline-secondary btn-rounded waves-effect account__button">Załóż konto</button>
+                                    <button type="button" onClick={this.loginUser} className="btn btn-outline-secondary btn-rounded waves-effect account__button">Zaloguj się</button>
                                 </form>
                             </div>
                             <div className="col-md-2">
