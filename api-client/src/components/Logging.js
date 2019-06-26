@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
+import { Link } from 'react-router-dom';
 
-import { API_BASE_URL } from '../api/constants';
+import { API_BASE_URL, ACCESS_TOKEN } from '../api/constants';
 
 export default class Logging extends Component {
     constructor(props) {
@@ -9,6 +10,7 @@ export default class Logging extends Component {
         this.state = {
             email: '',
             password: '',
+            userName: 'user',
             accessToken: null,
             success: false
         }
@@ -16,7 +18,7 @@ export default class Logging extends Component {
         this.handleEmailChange = this.handleEmailChange.bind(this);
         this.handlePasswordChange = this.handlePasswordChange.bind(this);
         this.loginUser = this.loginUser.bind(this);
-
+        this.logoutUser = this.logoutUser.bind(this);
     }
 
     handleEmailChange(event) {
@@ -50,22 +52,65 @@ export default class Logging extends Component {
         .then(response => response.json())
         .then(response => {
             localStorage.setItem('accessToken', response.accessToken);
-            this.setState({
-                accessToken: response.accessToken
-            })
+            this.props.history.push(`/`);
         })
         .catch(err => {
             console.log(err);
         });
+        
     }
 
+    logoutUser() {
+        localStorage.removeItem('accessToken');
+        setTimeout(() => {
+            this.props.history.push(`/`);
+        }, 0);
+    }
+
+    request = (options) => {
+        const headers = new Headers({
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer ' + localStorage.getItem('accessToken'),
+        })
+    
+        const defaults = {headers: headers};
+        options = Object.assign({}, defaults, options);
+    
+        return fetch(options.url, options)
+        .then(response =>
+            response.json().then(json => {
+                if(!response.ok) {
+                    return Promise.reject(json);
+                }
+                return json;
+            })
+        );
+    };
+    
+    getCurrentUser() {
+        if(!ACCESS_TOKEN) {
+            return Promise.reject("No access token set.");
+        }
+
+        return this.request({
+            url: "http://localhost:5000/user/me",
+            method: 'GET'
+        })
+        .then(response => {
+            this.setState({
+                userName: response.username
+            })
+        }).catch(error => {
+            console.log(error);
+        });
+    }
+
+    componentDidMount() {
+        this.getCurrentUser();
+    }
+
+
     render() {
-        //console.log(this.props)
-        if(this.state.accessToken) {
-            setTimeout(() => {
-                this.props.history.push(`/`);
-            }, 3000);
-        } 
         return (
           <div>
             <main>
@@ -73,6 +118,17 @@ export default class Logging extends Component {
                     <div className="container">
                         <div className="row">
                             <div className="col-md-5">
+                                { 
+                                localStorage.getItem('accessToken')
+                                ?
+                                <div>
+                                <h3>Witaj, {this.state.userName}</h3>
+                                <br/>
+                                <p>Wyloguj się, aby przełączyć się na inne konto</p>
+                                <button type="button" onClick={this.logoutUser} className="btn btn-outline-secondary btn-rounded waves-effect account__button">Wyloguj się</button>
+                                </div>
+                                :
+                                <div>
                                 <h3>Zaloguj się</h3>
                                 <form>
                                     <div className="form-group">
@@ -85,6 +141,10 @@ export default class Logging extends Component {
                                     </div>
                                     <button type="button" onClick={this.loginUser} className="btn btn-outline-secondary btn-rounded waves-effect account__button">Zaloguj się</button>
                                 </form>
+                                <br/>
+                                <p>Nie masz jeszcze konta? <Link to="/signup">Zarejestruj się za darmo!</Link></p>
+                                </div>
+                                }
                             </div>
                             <div className="col-md-2">
                                 <div className="col-wrapper">

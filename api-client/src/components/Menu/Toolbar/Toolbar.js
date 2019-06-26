@@ -92,7 +92,7 @@ export default class Toolbar extends Component {
                             </li>
                         </ul>
                     </div>
-                    { this.props.authenticated ? <div className="toolbar__username"><img className="toolbar__userimg" alt="user" src={user}/> {this.state.userName}</div> : <Logger />}
+                    { this.props.authenticated ? <div className="toolbar__username"><img className="toolbar__userimg" alt="user" src={user}/><Link to="/login">{this.state.userName}</Link> </div> : <Logger />}
                     
                 </nav>
                 </div>

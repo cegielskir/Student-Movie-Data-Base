@@ -9,24 +9,6 @@ function Item({ match }) {
 
             <div className="container">
                 <Client title={match.params.id}/>
-
-            <div>
-              { localStorage.getItem('accessToken') 
-                ? <div>
-                  <h3>Komentarze użytkowników</h3>
-                                        <form>
-                    <div className="form-group">
-           
-                        <textarea className="form-control" id="comment" rows="8"></textarea>
-                    </div>
-
-                        <button className="btn btn-outline-secondary ">
-                            Dodaj komentarz
-                        </button>
-                    </form>
-                  </div> 
-                : <p>Zaloguj się, aby móc dodawać i czytać komentarze!</p> }
-            </div>
             </div>
         </main>
       </div>

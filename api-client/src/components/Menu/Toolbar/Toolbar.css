@@ -71,8 +71,9 @@
     }
   }
 
-  .toolbar__username {
+  .toolbar__username a {
     color: #fff;
+    margin-left: 2px;
   }
 
   .toolbar__userimg {

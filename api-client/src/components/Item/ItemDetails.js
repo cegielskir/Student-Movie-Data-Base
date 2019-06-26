@@ -1,5 +1,7 @@
 import React, {Component} from 'react';
 
+import { ACCESS_TOKEN, API_BASE_URL } from '../../api/constants';
+
 import './Item.css';
 
 class ItemDetails extends Component {
@@ -7,14 +9,38 @@ class ItemDetails extends Component {
         super(props);
 
         this.state = {
-            a: ['', '', '', '', '', '', '', '', '', '']
+            a: ['', '', '', '', '', '', '', '', '', ''],
+            rating: 0
         }
 
         this.changeStars = this.changeStars.bind(this);
+        this.sendRating = this.sendRating.bind(this);
+    }
+
+    sendRating() {
+        const request = { 
+            method: 'POST',
+            headers: new Headers({
+                'Content-Type': 'application/json',
+                'Authorization': 'Bearer ' + ACCESS_TOKEN,
+            }),
+            body: {
+                value: this.state.rating,
+                title: this.props.details.Title,
+            }
+        }
+
+        //console.log(request)
+        fetch(API_BASE_URL + '/ratings', request)  
+        .then(function(res) {
+          return res.json();
+         })
+        .then(function(resJson) {
+              return resJson;
+         })
     }
 
     changeStars = index => {
-        console.log('change stars')
         let new_a = [];
         for(let i=0; i<10; i++) {
             i <= index ? new_a[i] = 'x' : new_a[i] = '';
@@ -22,6 +48,7 @@ class ItemDetails extends Component {
 
         this.setState({
             a: new_a,
+            rating: index+1
         })
     }
 
@@ -74,7 +101,7 @@ class ItemDetails extends Component {
                          ? <div> 
                              <p className="p__rating">Oceń film w skali 1-10</p>
                              {this.renderStars()}
-                         <button type="button" className="btn btn-outline-secondary btn-rounded waves-effect rating-button">Oceń film</button>
+                         <button onClick={this.sendRating} type="button" className="btn btn-outline-secondary btn-rounded waves-effect rating-button">Oceń film</button>
                             </div>
                          : <p>Zaloguj się aby móc oceniac filmy</p>
                         }
