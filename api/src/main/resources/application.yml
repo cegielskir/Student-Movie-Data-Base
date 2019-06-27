@@ -54,7 +54,6 @@ spring:
               scope:
                 - email
                 - profile
-                - openid
             facebook:
               clientId: 121189305185277
               clientSecret: cDsTkw_s1Sa4oXV38503bdn_

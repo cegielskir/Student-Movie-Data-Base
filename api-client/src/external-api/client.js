@@ -46,6 +46,7 @@ class Client extends Component {
    }
 
     render() {
+      //console.log(this.props);
       return (
         <div>
             <section>
@@ -62,7 +63,7 @@ class Client extends Component {
                 <div className="row">
                     <div className="col-md-12">
                         <h3>Obsada</h3>
-                        <ItemCast title={this.props.title} actors={this.state.movieDetails.Actors} />
+                        <ItemCast id={this.props.id} title={this.props.title} actors={this.state.movieDetails.Actors} />
                     </div>
                 </div>
             </section>

@@ -1,6 +1,7 @@
 package com.crgp.smdb.entity;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -36,6 +37,9 @@ public abstract class Production{
 
     @OneToMany(mappedBy = "production", cascade = CascadeType.ALL)
     private List<ProductionRating> ratings;
+
+    @OneToMany(mappedBy = "production", cascade = CascadeType.ALL)
+    private List<Comment> comments;
 
     public Production() {}
 
@@ -108,5 +112,39 @@ public abstract class Production{
     public void addRating(ProductionRating rating){
         this.ratings.add(rating);
         rating.setOwner(this);
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    public List<Creator> getCreators() {
+        return creators;
+    }
+
+    public void setCreators(List<Creator> creators) {
+        this.creators = creators;
+    }
+
+    public List<Genre> getGenres() {
+        return genres;
+    }
+
+    public void setGenres(List<Genre> genres) {
+        this.genres = genres;
+    }
+
+    public List<Comment> getComments() {
+        return comments;
+    }
+
+    public void setComments(List<Comment> comments) {
+        this.comments = comments;
+    }
+
+    public void addComment(Comment comment){
+        if(this.comments == null) this.comments = new ArrayList<>();
+        this.comments.add(comment);
+        comment.setProduction(this);
     }
 }

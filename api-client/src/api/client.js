@@ -84,7 +84,11 @@ class MovieProvider extends Component {
         <img alt={index} src={item.posterUrl} />
         <p  
         key={ index }>
-            <Link to={`movie/${item.title}`}>{item.title}</Link>
+            <Link to={{
+  pathname: `movie/${item.title}`,
+  state: {
+    movieID: item.id
+  } }}>{item.title}</Link>
         </p>
         </div>
         )

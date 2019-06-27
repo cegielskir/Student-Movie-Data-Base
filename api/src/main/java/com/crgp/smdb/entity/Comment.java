@@ -1,8 +1,11 @@
 package com.crgp.smdb.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 
 @Entity
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 public class Comment {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -10,6 +13,7 @@ public class Comment {
 
     private String content;
 
+    @JsonIgnore
     @OneToOne
     @JoinColumn(name = "production_id")
     private Production production;
@@ -19,6 +23,12 @@ public class Comment {
     private User user;
 
     public Comment() {
+    }
+
+    public Comment(String content, Production production, User user) {
+        this.content = content;
+        this.production = production;
+        this.user = user;
     }
 
     public Long getId() {

@@ -8,10 +8,18 @@ class ItemCast extends Component {
 
         this.state = {
             content: '',
+            comments: [],
+            isLoaded: false
         }
 
         this.handleInputChange = this.handleInputChange.bind(this);
         this.sendComment = this.sendComment.bind(this);
+        this.getComments = this.getComments.bind(this);
+    }
+
+    componentDidMount(){
+        setInterval(() => this.getComments(), 
+            1000);
     }
 
     handleInputChange(event) {
@@ -22,27 +30,71 @@ class ItemCast extends Component {
         event.preventDefault();
         const request = { 
             method: 'POST',
-            headers: new Headers({
+            headers: {
+                'Accept': 'application/json',
                 'Content-Type': 'application/json',
-                'Authorization': 'Bearer ' + ACCESS_TOKEN,
-            }),
-            body: {
-                content: this.state.content,
-                title: this.props.title,
-            }
+                'Authorization': 'Bearer ' + localStorage.getItem('accessToken'),
+            },
+            body: JSON.stringify({
+                'content': this.state.content
+            })
         }
 
-        console.log(request)
-        fetch(API_BASE_URL + '/ratings', request)  
+        fetch(API_BASE_URL + '/comment/' + this.props.id, request)  
         .then(function(res) {
           return res.json();
          })
-        .then(function(resJson) {
+        .then(resJson => {
+              this.setState({
+                isLoaded: true
+              })
               return resJson;
+         }).catch(error => {
+             console.log(error);
          })
     }
 
+    getComments() {
+        const request = { 
+            method: 'GET',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+                'Authorization': 'Bearer ' + ACCESS_TOKEN,
+            }
+        }
+
+        fetch(API_BASE_URL + '/comment/' + this.props.id, request)  
+        .then(function(res) {
+          return res.json();
+         })
+        .then(resJson => {
+              this.setState({
+                  comments: resJson,
+                  isLoaded: true
+              })
+         }).catch(error => {
+             console.log(error);
+         })
+    }
+
+    renderComments() {
+        return this.state.comments.map((comment, index) => (
+            <div key={index}>
+                {   comment.user ?
+                    <div>
+                    <p><b> {comment.user.username}</b> piszę: </p>
+                    <p className="comment__content">{comment.content}</p>
+                    </div>
+                    :
+                    <div></div>
+                }
+            </div>
+        ));
+    }
+
     render() {
+        //console.log(this.state)
         let actors = this.props.actors;
         return (
             <div>
@@ -56,6 +108,7 @@ class ItemCast extends Component {
               { localStorage.getItem('accessToken') 
                 ? <div>
                   <h3>Komentarze użytkowników</h3>
+                  { this.state.isLoaded && this.state.comments !== [] ? this.renderComments() : <div></div> }
                                         <form>
                     <div className="form-group">
            

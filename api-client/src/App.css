@@ -79,3 +79,8 @@ section {
     margin-top: 16px;
     max-width: 90%;
 }
+
+.comment__content {
+    background: #f0f0f0;
+    padding: 10px;
+}
