@@ -2,6 +2,8 @@ package com.crgp.smdb.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.annotations.NaturalId;
+import org.springframework.lang.Nullable;
+
 import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
@@ -26,16 +28,16 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotBlank
+    @Column(nullable=false)
     @Size(max = 40)
     private String name;
 
-    @NotBlank
+    @Column(nullable=false)
     @Size(max = 15)
     private String username;
 
     @NaturalId
-    @NotBlank
+    @Column(nullable=false)
     @Size(max = 40)
     @Email
     private String email;
@@ -43,7 +45,7 @@ public class User {
     @JsonIgnore
     private String password;
 
-    @ManyToMany(fetch = FetchType.LAZY)
+    @ManyToMany(cascade = CascadeType.ALL,fetch=FetchType.EAGER)
     @JoinTable(name = "user_roles",
             joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "role_id"))

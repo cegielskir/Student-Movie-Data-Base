@@ -32,6 +32,7 @@ public class OAuth2AuthenticationFailureHandler extends SimpleUrlAuthenticationF
                 .build().toUriString();
 
         System.out.println(exception.getCause());
+
         System.out.println(exception.getMessage());
         exception.printStackTrace();
         httpCookieOAuth2AuthorizationRequestRepository.removeAuthorizationRequestCookies(request, response);
