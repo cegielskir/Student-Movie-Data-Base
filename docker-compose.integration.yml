@@ -23,8 +23,14 @@ services:
     build:
       context: api # Use an image built from the specified dockerfile in the `api` directory.
       dockerfile: Dockerfile.Tests
-    environment:
+    ports:
+      - "5000:5000" # Forward the exposed port 8080 on the container to port 8080 on the host machine
+    restart: always
+    environment: # Pass environment variables to the service
       - TEAMCITY_PROJECT_NAME
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3306/smdb?useSSL=false
+      SPRING_DATASOURCE_USERNAME: root
+      SPRING_DATASOURCE_PASSWORD: hbstudent 
     networks:
       - backend 
 volumes:
