@@ -3,7 +3,7 @@ node('docker') {
     stage 'Checkout'
         checkout scm
     stage 'Build & UnitTest'
-	    sh "cd app-server"
+	    sh "cd api"
 		sh "chmod a+x mvnw"
 		sh "cd .."
         sh "docker-compose build"
