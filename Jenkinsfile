@@ -4,7 +4,7 @@ node('docker') {
         checkout scm
     stage 'Build & UnitTest'
 	    sh "cd api"
-		sh "chmod a+x mvnw"
+		sh "sudo chmod a+x mvnw"
 		sh "cd .."
         sh "docker-compose build"
  // 
