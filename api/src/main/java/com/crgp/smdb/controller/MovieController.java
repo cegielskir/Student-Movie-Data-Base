@@ -28,7 +28,8 @@ public class MovieController {
                 .orElseThrow(() -> new ResourceNotFoundException("movie", "id", movieId));
     }
 
-    @PostMapping("/xdd")
+    @PostMapping("/movies")
+    @CrossOrigin(exposedHeaders = "errors, content-type")
     public void addMovie(@RequestBody Movie movie) {
         movieRepository.save(movie);
     }
