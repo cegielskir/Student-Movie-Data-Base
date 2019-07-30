@@ -3,9 +3,6 @@ node('docker') {
     stage 'Checkout'
         checkout scm
     stage 'Build & UnitTest'
-	    cd api
-		sudo chmod a+x mvnw
-		cd ..
         sh "docker-compose build"
  // 
  //   stage 'Integration Test'
