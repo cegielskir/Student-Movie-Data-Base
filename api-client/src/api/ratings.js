@@ -60,8 +60,11 @@ class RatingProvider extends Component {
   
   
   renderRatings() {
-    let posters = this.state.moviesPosters.reverse();
-    return this.state.ratingsList.reverse().slice(0, 6).map( (item, index) => (
+    
+    let posters = this.state.moviesPosters ? this.state.moviesPosters.reverse() : null;
+    
+    if(posters) { 
+      return this.state.ratingsList.reverse().slice(0, 6).map( (item, index) => (
         <div key={ index } className="col-md-2 div-mock">
                 <img className="rating__img" alt={index} src={posters[index].posterUrl } />
                 <div className="mock-caption">
@@ -69,7 +72,9 @@ class RatingProvider extends Component {
                 </div>
         </div>
         )
-    );
+      );
+    }
+    return <></>;
   }
 
 
