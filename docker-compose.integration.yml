@@ -14,6 +14,8 @@ services:
     volumes:
       - db-data:/var/lib/mysql
     restart: always
+    networks:
+      - backend 
   integration:
     depends_on:
       - mysql
@@ -23,5 +25,9 @@ services:
       dockerfile: Dockerfile.Tests
     environment:
       - TEAMCITY_PROJECT_NAME
+    networks:
+      - backend 
 volumes:
     db-data:
+networks:
+  - backend 
