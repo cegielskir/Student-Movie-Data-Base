@@ -41,6 +41,9 @@ public abstract class Production{
     @OneToMany(mappedBy = "production", cascade = CascadeType.ALL)
     private List<Comment> comments;
 
+    @OneToMany(mappedBy = "production", cascade = CascadeType.ALL)
+    private List<Review> reviews;
+
     public Production() {}
 
     public long getId() {
@@ -146,5 +149,19 @@ public abstract class Production{
         if(this.comments == null) this.comments = new ArrayList<>();
         this.comments.add(comment);
         comment.setProduction(this);
+    }
+
+    public List<Review> getReviews() {
+        return reviews;
+    }
+
+    public void setReviews(List<Review> reviews) {
+        this.reviews = reviews;
+    }
+
+    public void addReview(Review review){
+        if(this.reviews == null) this.reviews = new ArrayList<>();
+        this.reviews.add(review);
+        review.setProduction(this);
     }
 }

@@ -8,8 +8,13 @@ class ItemCast extends Component {
 
         this.state = {
             content: '',
+            review: '',
             comments: [],
-            isLoaded: false
+            isLoaded: false,
+            userToken: localStorage.getItem('accessToken'),
+            isAddedComment: false,
+            isAddedReview: false,
+            isAddedRating: false,
         }
 
         this.handleInputChange = this.handleInputChange.bind(this);
@@ -18,8 +23,7 @@ class ItemCast extends Component {
     }
 
     componentDidMount(){
-        setInterval(() => this.getComments(), 
-            1000);
+        this.getComments();
     }
 
     handleInputChange(event) {
@@ -33,7 +37,7 @@ class ItemCast extends Component {
             headers: {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json',
-                'Authorization': 'Bearer ' + localStorage.getItem('accessToken'),
+                'Authorization': 'Bearer ' + this.state.userToken ,
             },
             body: JSON.stringify({
                 'content': this.state.content
@@ -46,8 +50,10 @@ class ItemCast extends Component {
          })
         .then(resJson => {
               this.setState({
-                isLoaded: true
+                isLoaded: true,
+                isAddedComment: true
               })
+              this.getComments();
               return resJson;
          }).catch(error => {
              console.log(error);
@@ -70,6 +76,7 @@ class ItemCast extends Component {
          })
         .then(resJson => {
               this.setState({
+                  content: '',
                   comments: resJson,
                   isLoaded: true
               })
@@ -94,7 +101,6 @@ class ItemCast extends Component {
     }
 
     render() {
-        //console.log(this.state)
         let actors = this.props.actors;
         return (
             <div>
@@ -109,18 +115,43 @@ class ItemCast extends Component {
                 ? <div>
                   <h3>Komentarze użytkowników</h3>
                   { this.state.isLoaded && this.state.comments !== [] ? this.renderComments() : <div></div> }
-                                        <form>
-                    <div className="form-group">
-           
-                        <textarea className="form-control" id="comment" rows="8" value={this.state.content} onChange={this.handleInputChange}></textarea>
-                    </div>
-
+                    { this.state.isAddedComment
+                    ?
+                    <p>Dziękujemy za dodanie komentarza!</p>
+                    :
+                    <form>
+                        <div className="form-group">
+                            <textarea className="form-control" id="comment" rows="8" value={this.state.content} onChange={this.handleInputChange}></textarea>
+                        </div>
                         <button onClick={this.sendComment} className="btn btn-outline-secondary ">
                             Dodaj komentarz
                         </button>
                     </form>
+                    }
+                    <br />
+                    { this.state.isAddedReview ?
+                    <p>Dziękujemy za dodanie komentarza!</p>
+                    :
+                    <>
+                    <h3>Dodaj własną recenzję!</h3>
+                    <br />
+                    <form>
+                    <div className="form-group">
+                        <textarea className="form-control" id="comment" rows="8" value={this.state.content} onChange={this.handleInputChange}></textarea>
+                    </div>
+
+                        <button onClick={this.sendComment} className="btn btn-outline-secondary ">
+                            Dodaj recenzję
+                        </button>
+                    </form>
+                    </>
+                    }
                   </div> 
-                : <p>Zaloguj się, aby móc dodawać i czytać komentarze!</p> }
+                :
+                <> 
+                    <p>Zaloguj się, aby móc dodawać i czytać komentarze!</p> 
+                </>
+                }
             </div>
             </div>
         );
