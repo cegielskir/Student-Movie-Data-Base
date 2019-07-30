@@ -14,6 +14,8 @@ public class CreatorAward extends Award{
     @JoinColumn(name = "creator_id")
     private Creator creator;
 
+    public CreatorAward() {}
+
     public CreatorAward(Creator creator) {}
 
     @Override
