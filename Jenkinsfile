@@ -4,8 +4,8 @@ node('docker') {
         checkout scm
     stage 'Build & UnitTest'
         sh "docker-compose build"
- // 
- //   stage 'Integration Test'
-  //      sh "docker-compose -f docker-compose.integration.yml up --force-recreate --abort-on-container-exit"
-  //      sh "docker-compose -f docker-compose.integration.yml down -v"
+  
+    stage 'Integration Test'
+        sh "docker-compose -f docker-compose.integration.yml up --force-recreate --abort-on-container-exit"
+        sh "docker-compose -f docker-compose.integration.yml down -v"
 }

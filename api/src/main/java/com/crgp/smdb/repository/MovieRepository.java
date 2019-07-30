@@ -20,4 +20,6 @@ public interface MovieRepository extends JpaRepository<Movie, Long> {
     List<Movie> findByIdIn(List<Long> pollIds, Sort sort);
 
     List<Movie> findByGenres(List<Genre> genres);
+
+    Optional<Movie> findByTitle(String title);
 }

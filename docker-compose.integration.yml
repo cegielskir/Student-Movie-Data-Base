@@ -19,14 +19,14 @@ services:
     image: "app-server:B${BUILD_NUMBER}"
     build:
       context: .
-  //integration:
-  //  depends_on:
- //     - app-server
-  //  image: "accountownerapp:test-B${BUILD_NUMBER}"
-  //  build:
- //     context: .
- //     dockerfile: Dockerfile.Integration
-  //  environment:
- //     - TEAMCITY_PROJECT_NAME
+  integration:
+    depends_on:
+      - app-server
+    image: "smdb_api:test-B${BUILD_NUMBER}"
+    build:
+      context: api # Use an image built from the specified dockerfile in the `api` directory.
+      dockerfile: Dockerfile.Tests
+    environment:
+      - TEAMCITY_PROJECT_NAME
 volumes:
     db-data:
