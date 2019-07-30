@@ -10,8 +10,7 @@ services:
       MYSQL_PASSWORD: hbstudent
       DEBUG: 1
     volumes:
-      - dbdata:/var/lib/mysql
-      - ./_MySQL_Init_Script:/docker-entrypoint-initdb.d
+      - db-data:/var/lib/mysql
     restart: always
   app-server:
     depends_on:
