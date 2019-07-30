@@ -89,7 +89,7 @@ export default class Logging extends Component {
     
     getCurrentUser() {
         return this.request({
-            url: "http://localhost:5000/user/me",
+            url: "http://agh.codetype.pl:5000/user/me",
             method: 'GET'
         })
         .then(response => {
