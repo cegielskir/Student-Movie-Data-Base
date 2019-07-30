@@ -60,8 +60,8 @@ class RatingProvider extends Component {
   
   
   renderRatings() {
-    
-    let posters = !!this.state.moviesPosters ? this.state.moviesPosters.reverse() : null;
+    if(this.state.isLoaded1 && this.state.isLoaded2){
+    let posters = this.state.moviesPosters.reverse() ;
     
      
       return this.state.ratingsList.reverse().slice(0, 6).map( (item, index) => (
@@ -73,6 +73,7 @@ class RatingProvider extends Component {
         </div>
         )
       );
+    }
     }
     
   
