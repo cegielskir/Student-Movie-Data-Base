@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+// eslint-disable-next-line
 import { Redirect } from 'react-router-dom'
 
 class OAuth2RedirectHandler extends Component {
