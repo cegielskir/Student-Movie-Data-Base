@@ -15,6 +15,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/api")
@@ -65,4 +66,19 @@ public class ReviewController {
         return review;
     }
 
+    @DeleteMapping("/review/{reviewId}")
+    public void deleteReview(@PathVariable long reviewId) {
+        Optional<Review> review = reviewRepository.findById(reviewId);
+        reviewRepository.delete(review.get());
+    }
+
+    @PutMapping("review/{reviewId}")
+    public Review acceptReview(@PathVariable long reviewId) {
+        Review review =  reviewRepository.findById(reviewId).orElseThrow(() -> new ResourceNotFoundException("review", "id", reviewId));
+        review.setAccepted(true);
+
+        reviewRepository.save(review);
+
+        return review;
+    }
 }

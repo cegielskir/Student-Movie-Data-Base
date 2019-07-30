@@ -1,5 +1,9 @@
 package com.crgp.smdb.entity;
 
+import com.fasterxml.jackson.annotation.JsonSubTypes;
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
+import org.hibernate.annotations.Type;
+
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -7,7 +11,14 @@ import java.util.List;
 @Entity
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @DiscriminatorColumn(name = "production_type")
+@JsonTypeInfo(use=JsonTypeInfo.Id.CLASS, include=JsonTypeInfo.As.PROPERTY, property="@class")
 public abstract class Production{
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    private String type;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

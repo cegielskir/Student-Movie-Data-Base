@@ -1,12 +1,11 @@
 import React, { Component } from 'react';
 
-import { ACCESS_TOKEN, API_BASE_URL } from './constants'
+import {  API_BASE_URL } from './constants'
 
 const request = { 
     method: 'GET',
     headers: new Headers({
         'Content-Type': 'application/json',
-        'Authorization': 'Bearer ' + ACCESS_TOKEN,
     })
 }
 

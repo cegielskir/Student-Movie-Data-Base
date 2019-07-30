@@ -1,6 +1,9 @@
 package com.crgp.smdb.entity;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
+
 import javax.persistence.*;
 import java.sql.Time;
 import java.util.Date;
@@ -10,23 +13,11 @@ import java.util.List;
 @DiscriminatorValue("movie")
 public class Movie extends Production{
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
-
     private Date premiereDate;
     private Time duration;
     private String posterUrl;
 
     public Movie() {}
-
-    public long getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
 
     public Date getPremiereDate() {
         return premiereDate;
@@ -55,7 +46,6 @@ public class Movie extends Production{
     @Override
     public String toString() {
         return "Movie{" +
-                "id=" + id +
                 ", premiereDate=" + premiereDate +
                 ", duration=" + duration +
                 ", posterUrl=" + posterUrl +

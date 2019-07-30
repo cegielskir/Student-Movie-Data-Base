@@ -13,6 +13,8 @@ public class Review {
 
     private String content;
 
+    private boolean isAccepted;
+
     @JsonIgnore
     @OneToOne
     @JoinColumn(name = "production_id")
@@ -29,6 +31,7 @@ public class Review {
         this.content = content;
         this.production = production;
         this.user = user;
+        this.isAccepted = false;
     }
 
     public Long getId() {
@@ -37,6 +40,14 @@ public class Review {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public boolean isAccepted() {
+        return isAccepted;
+    }
+
+    public void setAccepted(boolean accepted) {
+        isAccepted = accepted;
     }
 
     public String getContent() {

@@ -1,11 +1,12 @@
 import React from 'react';
-import { ACCESS_TOKEN, API_BASE_URL } from '../api/constants'
+import { API_BASE_URL } from '../api/constants'
 
 class Admin extends React.Component {
     state = {
         userRole: '',
         commentsList: [],
         reviewsList: [],
+        loaded: false,
     }
 
     componentDidMount() {
@@ -14,8 +15,11 @@ class Admin extends React.Component {
         this.getAllReviews();
     }
 
+    componentDidUpdate() {
+        this.getAllComments();
+        this.getAllReviews();
+    }
 
-    
     request = (options) => {
         const headers = new Headers({
             'Content-Type': 'application/json',
@@ -37,17 +41,14 @@ class Admin extends React.Component {
     };
     
     getAllComments = () =>  {
-        if(!ACCESS_TOKEN) {
-            return Promise.reject("No access token set.");
-        }
-    
+
         return this.request({
             url: API_BASE_URL + "/comments",
             method: 'GET'
         })
         .then(response => {
-            console.log(this.state)
             this.setState({
+                loaded: true,
                 commentsList: response
             })
         }).catch(error => {
@@ -56,17 +57,14 @@ class Admin extends React.Component {
     }
 
     getAllReviews = () =>  {
-        if(!ACCESS_TOKEN) {
-            return Promise.reject("No access token set.");
-        }
-    
+
         return this.request({
             url: API_BASE_URL + "/reviews",
             method: 'GET'
         })
         .then(response => {
-            console.log(this.state)
             this.setState({
+                loaded: true,
                 reviewsList: response
             })
         }).catch(error => {
@@ -75,16 +73,12 @@ class Admin extends React.Component {
     }
 
     getCurrentUser = () =>  {
-        if(!ACCESS_TOKEN) {
-            return Promise.reject("No access token set.");
-        }
     
         return this.request({
             url: "http://localhost:5000/user/me",
             method: 'GET'
         })
         .then(response => {
-            console.log(this.state)
             this.setState({
                 userRole: response.roles[0].name
             })
@@ -94,16 +88,98 @@ class Admin extends React.Component {
         });
     }
 
+    deleteReview = (Id) =>  {
+        return this.request({
+            url: API_BASE_URL + "/review/" + Id,
+            method: 'DELETE'
+        })
+        .then(response => {
+            this.setState({
+                loaded: false
+            })
+        })
+        .then(() => {
+            this.props.history.push('/admin');
+        })
+        .catch(error => {
+            console.log(error);
+        });
+
+        
+    }
+
+    acceptReview = (Id) =>  {
+        return this.request({
+            url: API_BASE_URL + "/review/" + Id,
+            method: 'PUT'
+        })
+        .then(response => {
+            this.setState({
+                loaded: false
+            })
+        })
+        .then(() => {
+            this.props.history.push('/admin');
+        })
+        .catch(error => {
+            console.log(error);
+        });
+    }
+
+
+    deleteComment = (Id) =>  {
+        return this.request({
+            url: API_BASE_URL + "/comment/" + Id,
+            method: 'DELETE'
+        })
+        .then(response => {
+            this.setState({
+                loaded: false
+            });
+        })
+        .then(() => {
+            this.props.history.push('/admin');
+        })
+        .catch(error => {
+            console.log(error);
+        });
+    }
+
     renderComments() {
         return this.state.commentsList.map((comment, index) => (
             <div key={index}>
                 {   comment.user ?
-                    <div>
-                    <p><b> {comment.user.username}</b> piszę: </p>
-                    <p className="comment__content">{comment.content}</p>
-                    <button type="button" className="btn btn-success">Akceptuj</button>
-                    <button type="button" className="btn btn-danger">Odrzuć</button>
+                    <div className="row">
+                        <div className="col-11">
+                            <p><b> {comment.user.username}</b> piszę: </p>
+                            <p className="comment__content">{comment.content}</p>
+                        </div>
+                        <div className="col-1">
+                            <button type="button" className="btn btn-danger admin__button" onClick={() => this.deleteComment(comment.id)}>Usuń</button>
+                        </div>
                     </div>
+                    :
+                    <div></div>
+                }
+            </div>
+        ));
+    }
+
+    renderReviews() {
+        return this.state.reviewsList.map((comment, index) => (
+            <div key={index}>
+                {   comment.user ?
+                    <div className="row">
+                        <div className="col-10">
+                            <p><b> {comment.user.username}</b> napisał recenzję: </p>
+                            <p className="comment__content">{comment.content}</p>
+                        </div>
+                        <div className="col-1">
+                            <button type="button" className="btn btn-danger admin__button" onClick={() => this.deleteReview(comment.id)}>Odrzuć</button>
+                        </div>
+                        <div className="col-1">
+                            <button type="button" className="btn btn-success admin__button" onClick={() => this.acceptReview(comment.id)}>Akceptuj</button>
+                        </div>                    </div>
                     :
                     <div></div>
                 }
@@ -118,10 +194,10 @@ class Admin extends React.Component {
                     <div className="container">
                         {this.state.userRole === 'ROLE_ADMIN'  
                             ?   <>
-                                    <p>Witaj administratorze</p>
+                                    <h2>Komentarze użytkowników</h2>
                                     { this.renderComments() }
-                                    <p>Wypisz recenzję</p>
-                                    <p>Dodaj film</p>
+                                    <h2>Recenzję użytkowników</h2>
+                                    { this.renderReviews() }
                                     <p>Dodaj aktora</p>
                                 </> 
 

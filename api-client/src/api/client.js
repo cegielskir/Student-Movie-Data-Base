@@ -1,12 +1,11 @@
 import React, { Component } from 'react';
 import { Link} from "react-router-dom";
 
-import { ACCESS_TOKEN, API_BASE_URL } from './constants'
+import { API_BASE_URL } from './constants'
 
 const request = (options) => {
     const headers = new Headers({
         'Content-Type': 'application/json',
-        'Authorization': 'Bearer ' + ACCESS_TOKEN,
     })
 
     const defaults = {headers: headers};
@@ -24,10 +23,6 @@ const request = (options) => {
 };
 
 function getCurrentUser() {
-    if(!ACCESS_TOKEN) {
-        return Promise.reject("No access token set.");
-    }
-
     return request({
         url: API_BASE_URL + "/movies",
         method: 'GET'

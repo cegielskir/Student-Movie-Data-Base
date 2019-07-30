@@ -84,3 +84,7 @@ section {
     background: #f0f0f0;
     padding: 10px;
 }
+
+.admin__button {
+    margin-top: 40px;
+}

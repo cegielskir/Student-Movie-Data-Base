@@ -15,6 +15,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/api")
@@ -63,6 +64,12 @@ public class CommentController {
         commentRepository.save(comment);
 
         return comment;
+    }
+
+    @DeleteMapping("/comment/{commentId}")
+    public void deleteReview(@PathVariable long commentId) throws JsonProcessingException {
+        Optional<Comment> comment = commentRepository.findById(commentId);
+        commentRepository.delete(comment.get());
     }
 
 }

@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import { Link } from 'react-router-dom';
 
-import { API_BASE_URL, ACCESS_TOKEN } from '../api/constants';
+import { API_BASE_URL } from '../api/constants';
 
 export default class Logging extends Component {
     constructor(props) {
@@ -88,10 +88,6 @@ export default class Logging extends Component {
     };
     
     getCurrentUser() {
-        if(!ACCESS_TOKEN) {
-            return Promise.reject("No access token set.");
-        }
-
         return this.request({
             url: "http://localhost:5000/user/me",
             method: 'GET'
