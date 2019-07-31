@@ -40,6 +40,8 @@ loadMovies() {
               movies: json,
               isLoaded: true
           })
+      }).catch(error => {
+        console.log(error);
       })
   }
 
