@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Redirect } from 'react-router-dom';
 
 class OAuth2RedirectHandler extends Component {
     getUrlParameter(name) {
@@ -13,18 +14,22 @@ class OAuth2RedirectHandler extends Component {
     render() {        
         const token = this.getUrlParameter('token');
         const error = this.getUrlParameter('error');
-        console.log(this.props.location.search);
-        console.log(error, token);
+
         if(token) {
             localStorage.setItem('accessToken', token);
-
+            return <Redirect to={{
+                pathname: "/user",
+                state: { from: this.props.location }
+            }}/>; 
         } else {
-
+            return <Redirect to={{
+                pathname: "/login",
+                state: { 
+                    from: this.props.location,
+                    error: error 
+                }
+            }}/>; 
         }
-
-        return (
-            <div>Redirect page</div>       
-        );
     }
 }
 

@@ -13,7 +13,6 @@ function Item(props, { match }) {
             </div>
         </main>
       </div>
-
     );
   }
 

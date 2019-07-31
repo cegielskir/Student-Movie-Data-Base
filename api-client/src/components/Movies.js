@@ -1,13 +1,12 @@
 import React, {Component} from 'react';
 import { Link } from 'react-router-dom';
 
-import { ACCESS_TOKEN, API_BASE_URL } from '../api/constants'
+import { API_BASE_URL } from '../api/constants'
 
 const request = { 
   method: 'GET',
   headers: new Headers({
       'Content-Type': 'application/json',
-      'Authorization': 'Bearer ' + ACCESS_TOKEN,
   })
 }
 
@@ -29,7 +28,10 @@ componentDidMount() {
 loadMovies() {
   fetch(API_BASE_URL + '/movies', request)  
     .then(function(res) {
-      return res.json();
+      if(res.ok){
+        return res.json();
+      }
+      throw Error('Fetch error');
      })
     .then(function(resJson) {
           return resJson;
@@ -38,6 +40,8 @@ loadMovies() {
               movies: json,
               isLoaded: true
           })
+      }).catch(error => {
+        console.log(error);
       })
   }
 

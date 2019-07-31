@@ -1,5 +1,9 @@
 package com.crgp.smdb.entity;
 
+import com.fasterxml.jackson.annotation.JsonSubTypes;
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
+import org.hibernate.annotations.Type;
+
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -8,6 +12,12 @@ import java.util.List;
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @DiscriminatorColumn(name = "production_type")
 public abstract class Production{
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    private String type;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -41,14 +51,13 @@ public abstract class Production{
     @OneToMany(mappedBy = "production", cascade = CascadeType.ALL)
     private List<Comment> comments;
 
+    @OneToMany(mappedBy = "production", cascade = CascadeType.ALL)
+    private List<Review> reviews;
+
     public Production() {}
 
     public long getId() {
         return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
     }
 
     public String getTitle() {
@@ -146,5 +155,19 @@ public abstract class Production{
         if(this.comments == null) this.comments = new ArrayList<>();
         this.comments.add(comment);
         comment.setProduction(this);
+    }
+
+    public List<Review> getReviews() {
+        return reviews;
+    }
+
+    public void setReviews(List<Review> reviews) {
+        this.reviews = reviews;
+    }
+
+    public void addReview(Review review){
+        if(this.reviews == null) this.reviews = new ArrayList<>();
+        this.reviews.add(review);
+        review.setProduction(this);
     }
 }

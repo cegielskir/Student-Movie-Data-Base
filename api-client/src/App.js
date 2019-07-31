@@ -12,6 +12,7 @@ import Movies from './components/Movies'
 import Series from './components/Series'
 import Rankings from './components/Rankings'
 import User from './components/User'
+import Admin from './components/Admin'
 
 /*-- registration and logging page --*/
 import Logging from './components/Logging'
@@ -65,7 +66,8 @@ class App extends Component {
               <Route path="/movie/:id" component={Item} />
               <Route path="/review/:id" component={Review} />
 
-              <Route path="/oauth2/redirect" component={OAuth2RedirectHandler}></Route> 
+              <Route path="/oauth2/redirect" component={OAuth2RedirectHandler}></Route>
+              <Route path="/admin" component={Admin}></Route> 
               <Route component={NotFound} />
             </Switch>
 

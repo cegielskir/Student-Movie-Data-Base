@@ -1,10 +1,10 @@
 package com.crgp.smdb.controller;
 
-import com.crgp.smdb.entity.Comment;
+import com.crgp.smdb.entity.Review;
 import com.crgp.smdb.entity.Movie;
 import com.crgp.smdb.entity.User;
 import com.crgp.smdb.exception.ResourceNotFoundException;
-import com.crgp.smdb.repository.CommentRepository;
+import com.crgp.smdb.repository.ReviewRepository;
 import com.crgp.smdb.repository.MovieRepository;
 import com.crgp.smdb.repository.UserRepository;
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -19,10 +19,10 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/api")
-public class CommentController {
+public class ReviewController {
 
     @Autowired
-    private CommentRepository commentRepository;
+    private ReviewRepository reviewRepository;
 
     @Autowired
     private MovieRepository movieRepository;
@@ -30,23 +30,23 @@ public class CommentController {
     @Autowired
     private UserRepository userRepository;
 
-    @GetMapping("/comments")
-    public List<Comment> getReviews(){
-        return commentRepository.findAll();
+    @GetMapping("/reviews")
+    public List<Review> getReviews(){
+        return reviewRepository.findAll();
     }
 
-    @GetMapping("/comment/{movieId}")
-    public List<Comment> getComment(@PathVariable Long movieId){
+    @GetMapping("/review/{movieId}")
+    public List<Review> getReview(@PathVariable Long movieId){
         Movie movie = movieRepository.findById(movieId)
                 .orElseThrow(() -> new ResourceNotFoundException("movie", "id", movieId));
-        return movie.getComments();
+        return movie.getReviews();
     }
 
-    @PostMapping("/comment/{movieId}")
-    public Comment addComment(@PathVariable Long movieId, @RequestBody Comment comment) throws JsonProcessingException {
+    @PostMapping("/review/{movieId}")
+    public Review addReview(@PathVariable Long movieId, @RequestBody Review review) throws JsonProcessingException {
         Movie movie = movieRepository.findById(movieId)
                 .orElseThrow(() -> new ResourceNotFoundException("movie", "id", movieId));
-        movie.addComment(comment);
+        movie.addReview(review);
         movieRepository.save(movie);
 
         //get current user
@@ -59,17 +59,26 @@ public class CommentController {
         }
         User user = userRepository.findByEmail(userEmail).get();
 
-        comment.setUser(user);
+        review.setUser(user);
         userRepository.save(user);
-        commentRepository.save(comment);
+        reviewRepository.save(review);
 
-        return comment;
+        return review;
     }
 
-    @DeleteMapping("/comment/{commentId}")
-    public void deleteReview(@PathVariable long commentId) throws JsonProcessingException {
-        Optional<Comment> comment = commentRepository.findById(commentId);
-        commentRepository.delete(comment.get());
+    @DeleteMapping("/review/{reviewId}")
+    public void deleteReview(@PathVariable long reviewId) {
+        Optional<Review> review = reviewRepository.findById(reviewId);
+        reviewRepository.delete(review.get());
     }
 
+    @PutMapping("review/{reviewId}")
+    public Review acceptReview(@PathVariable long reviewId) {
+        Review review =  reviewRepository.findById(reviewId).orElseThrow(() -> new ResourceNotFoundException("review", "id", reviewId));
+        review.setAccepted(true);
+
+        reviewRepository.save(review);
+
+        return review;
+    }
 }

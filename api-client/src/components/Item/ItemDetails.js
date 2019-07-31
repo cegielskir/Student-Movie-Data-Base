@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 
-import { ACCESS_TOKEN, API_BASE_URL } from '../../api/constants';
+import { API_BASE_URL } from '../../api/constants';
 
 import './Item.css';
 
@@ -10,7 +10,9 @@ class ItemDetails extends Component {
 
         this.state = {
             a: ['', '', '', '', '', '', '', '', '', ''],
-            rating: 0
+            isRatingAdded: false,
+            rating: 0,
+            userToken: localStorage.getItem('accessToken'),
         }
 
         this.changeStars = this.changeStars.bind(this);
@@ -22,7 +24,6 @@ class ItemDetails extends Component {
             method: 'POST',
             headers: new Headers({
                 'Content-Type': 'application/json',
-                'Authorization': 'Bearer ' + ACCESS_TOKEN,
             }),
             body: {
                 value: this.state.rating,
@@ -37,6 +38,11 @@ class ItemDetails extends Component {
          })
         .then(function(resJson) {
               return resJson;
+         })
+         .then(resJson => {
+             this.setState({
+                isRatingAdded: true,
+             })
          })
     }
 
@@ -98,10 +104,15 @@ class ItemDetails extends Component {
  
                         </div>
                         { localStorage.getItem('accessToken')
-                         ? <div> 
+                         ?  this.state.isRatingAdded ?
+                            <div>
+                                <p>Oceniłeś film na: {this.state.rating}</p>
+                            </div>
+                            :
+                            <div> 
                              <p className="p__rating">Oceń film w skali 1-10</p>
                              {this.renderStars()}
-                         <button onClick={this.sendRating} type="button" className="btn btn-outline-secondary btn-rounded waves-effect rating-button">Oceń film</button>
+                             <button onClick={this.sendRating} type="button" className="btn btn-outline-secondary btn-rounded waves-effect rating-button">Oceń film</button>
                             </div>
                          : <p>Zaloguj się aby móc oceniac filmy</p>
                         }

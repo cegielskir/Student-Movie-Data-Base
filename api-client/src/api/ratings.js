@@ -1,12 +1,11 @@
 import React, { Component } from 'react';
 
-import { ACCESS_TOKEN, API_BASE_URL } from './constants'
+import {  API_BASE_URL } from './constants'
 
 const request = { 
     method: 'GET',
     headers: new Headers({
         'Content-Type': 'application/json',
-        'Authorization': 'Bearer ' + ACCESS_TOKEN,
     })
 }
 
@@ -32,7 +31,10 @@ class RatingProvider extends Component {
   loadRatings() {
     fetch(API_BASE_URL + '/ratings', request)  
   .then(function(res) {
-    return res.json();
+    if(res.ok){
+      return res.json();
+    }
+    throw Error('Fetch error');
    })
   .then(function(resJson) {
         return resJson;
@@ -41,13 +43,16 @@ class RatingProvider extends Component {
            ratingsList: json,
            isLoaded1: true
        })
-   })
+   }).catch(error => console.log(error));
   }
 
   loadPosters(_id) {
     fetch(API_BASE_URL + '/movies', request)  
       .then(function(res) {
-        return res.json();
+        if(res.ok){
+          return res.json();
+        }
+        throw Error('Fetch error');
        })
       .then(function(resJson) {
             return resJson;
@@ -56,13 +61,17 @@ class RatingProvider extends Component {
                 moviesPosters: json,
                 isLoaded2: true
             })
-        })
+        }).catch(error => console.log(error));
     }
   
   
   renderRatings() {
-    let posters = this.state.moviesPosters.reverse();
-    return this.state.ratingsList.reverse().slice(0, 6).map( (item, index) => (
+    if(this.state.isLoaded1 && this.state.isLoaded2){
+      console.log(this.state.moviesPosters)
+    let posters = this.state.moviesPosters.reverse() ;
+
+     
+      return this.state.ratingsList.reverse().slice(0, 6).map( (item, index) => (
         <div key={ index } className="col-md-2 div-mock">
                 <img className="rating__img" alt={index} src={posters[index].posterUrl } />
                 <div className="mock-caption">
@@ -70,8 +79,11 @@ class RatingProvider extends Component {
                 </div>
         </div>
         )
-    );
-  }
+      );
+    }
+    }
+    
+  
 
 
     render() {
