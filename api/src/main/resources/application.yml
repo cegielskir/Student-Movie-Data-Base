@@ -50,7 +50,7 @@ spring:
           google:
             clientId: 745196290179-uk0mgj0021hnnjv95ib8dj4okh5du952.apps.googleusercontent.com
             clientSecret: cDsTkw_s1Sa4oXV38503bdn_
-            redirectUriTemplate: "{baseUrl}/api/oauth2/callback/{registrationId}"
+            redirectUriTemplate: "http://agh.codetype.pl:5000/api/oauth2/callback/{registrationId}"
             scope:
               - email
               - profile
