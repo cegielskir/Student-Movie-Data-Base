@@ -29,6 +29,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import javax.validation.Valid;
 import java.net.URI;
 import java.util.Collections;
+import java.util.List;
 
 @RestController
 @RequestMapping("/api/auth")
@@ -82,9 +83,12 @@ public class AuthController {
                 signUpRequest.getEmail(), signUpRequest.getPassword());
 
         user.setPassword(passwordEncoder.encode(user.getPassword()));
-
-        Role userRole = roleRepository.
-                findByName(RoleName.ROLE_USER)
+        List<Role> roles = roleRepository.findAll();
+        if(roles.size() == 0){
+            roleRepository.save(new Role(RoleName.ROLE_USER));
+            roleRepository.save(new Role(RoleName.ROLE_ADMIN));
+        }
+        Role userRole = roleRepository.findByName(RoleName.ROLE_USER)
                 .orElseThrow(() -> new AppException("User Role not set."));
 
         user.setRoles(Collections.singleton(userRole));
