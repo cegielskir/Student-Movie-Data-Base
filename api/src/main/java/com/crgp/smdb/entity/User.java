@@ -34,6 +34,7 @@ public class User {
 
     @Column(nullable=false)
     @Size(max = 15)
+    @NotBlank
     private String username;
 
     @NaturalId
