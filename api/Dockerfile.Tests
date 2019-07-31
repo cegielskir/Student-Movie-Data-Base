@@ -16,8 +16,8 @@ COPY pom.xml .
 # the pom.xml file has changed.
 RUN ./mvnw dependency:go-offline -B
 
-# Copy the project source
+# Package the application
+
 COPY src src
 
-# Package the application
-RUN ./mvnw '-Dtest=.*Test' test
+ENTRYPOINT ["./mvnw","-Dtest=.*Test", "test"]
