@@ -32,9 +32,8 @@ public class User {
     @Size(max = 40)
     private String name;
 
-    @Column(nullable=false)
+    @Column(nullable=true)
     @Size(max = 15)
-    @NotBlank
     private String username;
 
     @NaturalId
