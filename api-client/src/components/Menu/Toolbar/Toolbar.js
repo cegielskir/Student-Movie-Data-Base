@@ -9,8 +9,10 @@ import './Toolbar.css';
 
 import logo from './logo-mini-color.png';
 import user from './user.png';
+import { SHORT_URL } from '../../../api/constants';
 
 const ACCESS_TOKEN = localStorage.getItem('accessToken');
+
 
 export default class Toolbar extends Component {
     constructor(props) {
@@ -46,7 +48,7 @@ export default class Toolbar extends Component {
         }
 
         return this.request({
-            url: "http://agh.codetype.pl:5000/user/me",
+            url: SHORT_URL + "/user/me",
             method: 'GET'
         })
         .then(response => {

@@ -1,5 +1,5 @@
 import React from 'react';
-import { API_BASE_URL } from '../api/constants'
+import { API_BASE_URL, SHORT_URL } from '../api/constants'
 
 class Admin extends React.Component {
     state = {
@@ -75,7 +75,7 @@ class Admin extends React.Component {
     getCurrentUser = () =>  {
     
         return this.request({
-            url: "http://agh.codetype.pl:5000/user/me",
+            url: SHORT_URL + "/user/me",
             method: 'GET'
         })
         .then(response => {

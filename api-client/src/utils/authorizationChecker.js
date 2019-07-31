@@ -1,6 +1,7 @@
 import React from 'react';
 
 const ACCESS_TOKEN = localStorage.getItem('accessToken');
+import { SHORT_URL } from '../api/constants';
 
 const request = (options) => {
     const headers = new Headers({
@@ -28,7 +29,7 @@ const getCurrentUser = () =>  {
     }
 
     return request({
-        url: "http://agh.codetype.pl:5000/user/me",
+        url: SHORT_URL + "/user/me",
         method: 'GET'
     })
     .then(response => {

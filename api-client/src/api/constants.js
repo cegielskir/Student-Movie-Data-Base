@@ -1,5 +1,6 @@
 // export const ACCESS_TOKEN = 'eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiI1IiwiaWF0IjoxNTYzOTkyODU5LCJleHAiOjE1NjQ4NTY4NTl9.SWmVKH5cq9UTFegjHNaP51xGdqSKHxTIKSiB5G9FX0cMEk3DHEN03GPtXmCdyUBIKkCIKK-DKyOt_p0hO5GNOg';
 export const API_BASE_URL = 'http://agh.codetype.pl:5000/api';
+export const SHORT_URL = 'http://agh.codetype.pl:5000';
 
 export const OAUTH2_REDIRECT_URI = 'http://agh.codetype.pl:3000/oauth2/redirect'
 

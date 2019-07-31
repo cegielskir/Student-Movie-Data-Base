@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import { Link } from 'react-router-dom';
 
 import { API_BASE_URL, GOOGLE_AUTH_URL, FACEBOOK_AUTH_URL } from '../api/constants';
+import { SHORT_URL } from '../api/constants';
 
 export default class Logging extends Component {
     constructor(props) {
@@ -89,7 +90,7 @@ export default class Logging extends Component {
     
     getCurrentUser() {
         return this.request({
-            url: "http://agh.codetype.pl:5000/user/me",
+            url: SHORT_URL + "/user/me",
             method: 'GET'
         })
         .then(response => {
